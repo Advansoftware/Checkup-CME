@@ -131,7 +131,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
               <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center">
                 <DollarSign className="w-7 h-7 text-emerald-600" />
               </div>
-              <h3 className="font-semibold text-lg">Economia Prova</h3>
+              <h3 className="font-semibold text-lg">Economia Comprovada</h3>
               <p className="text-sm text-muted-foreground">
                 Identifique oportunidades de redução de custos e otimização de recursos.
               </p>
