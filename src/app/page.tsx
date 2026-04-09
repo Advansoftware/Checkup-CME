@@ -17,7 +17,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { questions, TOTAL_QUESTIONS } from '@/lib/checkup-questions';
+import { checkupQuestions } from '@/lib/checkup-questions';
 import {
   CATEGORIES,
   ESTABLISHMENT_TYPES,
@@ -150,14 +150,14 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           <CardHeader>
             <CardTitle className="text-xl flex items-center gap-2 text-gray-900">
               <BarChart3 className="w-5 h-5 text-teal-600" />
-              O Checkup Avalia 5 Dimensões
+              O Checkup Avalia 4 Dimensões
             </CardTitle>
             <CardDescription>
-              {TOTAL_QUESTIONS} questões distribuídas em 5 categorias estratégicas
+              {checkupQuestions.length} questões distribuídas em 4 categorias estratégicas
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {CATEGORIES.map((cat) => (
                 <div
                   key={cat.key}
@@ -758,21 +758,21 @@ function ConsentScreen({ consent1, consent2, onConsentChange, onStart, onBack }:
 // Screen 4: Assessment
 // ============================
 function AssessmentScreen({ responses, onAnswer, onFinish }: {
-  responses: Map<number, number>;
-  onAnswer: (questionId: number, answer: number) => void;
+  responses: Map<string, number>;
+  onAnswer: (questionId: string, answer: number) => void;
   onFinish: () => void;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const prevCategoryRef = useRef<CategoryKey | null>(null);
 
-  const currentQuestion = questions[currentIndex];
+  const TOTAL_QUESTIONS = checkupQuestions.length;
+  const currentQuestion = checkupQuestions[currentIndex];
   const currentCategory = currentQuestion.category;
   const categoryInfo = CATEGORIES.find(c => c.key === currentCategory)!;
-  const answeredCount = responses.size;
-
-  // Calculate progress percentage
-  const progressPercent = (answeredCount / TOTAL_QUESTIONS) * 100;
+  const totalAnswered = responses.size;
+  const answeredWithValues = Array.from(responses.values()).filter(v => v > 0).length;
+  const progressPercent = (totalAnswered / TOTAL_QUESTIONS) * 100;
 
   // Track category transitions
   useEffect(() => {
@@ -780,7 +780,7 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
   }, [currentCategory]);
 
   const goToNext = () => {
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < checkupQuestions.length - 1) {
       setDirection('forward');
       setCurrentIndex(prev => prev + 1);
     }
@@ -797,14 +797,16 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
     onFinish();
   };
 
-  const currentAnswer = responses.get(currentQuestion.id) || 0;
+  const currentAnswer = responses.get(currentQuestion.id) ?? null;
+  const selectedOption = currentAnswer !== null ? currentQuestion.options.find(o => o.value === currentAnswer) : null;
+  const isVisibilityGap = selectedOption && selectedOption.value === 0;
 
   // Determine if we can finish (all questions answered)
-  const allAnswered = answeredCount === TOTAL_QUESTIONS;
+  const allAnswered = totalAnswered === TOTAL_QUESTIONS;
 
   // Calculate questions per category up to current
-  const categoryStartIndex = questions.findIndex(q => q.category === currentCategory);
-  const categoryQuestions = questions.filter(q => q.category === currentCategory);
+  const categoryStartIndex = checkupQuestions.findIndex(q => q.category === currentCategory);
+  const categoryQuestions = checkupQuestions.filter(q => q.category === currentCategory);
   const questionInCategory = categoryQuestions.findIndex(q => q.id === currentQuestion.id) + 1;
 
   return (
@@ -818,7 +820,7 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
               Questão {currentIndex + 1} de {TOTAL_QUESTIONS}
             </span>
             <span className="text-sm font-medium text-primary">
-              {answeredCount} respondidas
+              {totalAnswered} respondidas
             </span>
           </div>
           <Progress value={progressPercent} className="h-2" />
@@ -826,7 +828,7 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
           {/* Category indicators */}
           <div className="flex gap-1 mt-3 flex-wrap">
             {CATEGORIES.map((cat) => {
-              const catQuestions = questions.filter(q => q.category === cat.key);
+              const catQuestions = checkupQuestions.filter(q => q.category === cat.key);
               const catAnswered = catQuestions.filter(q => responses.has(q.id)).length;
               const isActive = cat.key === currentCategory;
               const isComplete = catAnswered === catQuestions.length;
@@ -872,14 +874,26 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
                 key={currentIndex}
               >
                 <h2 className="text-lg font-semibold leading-relaxed mb-1">
-                  {currentQuestion.text}
+                  {currentQuestion.question}
                 </h2>
+                {currentQuestion.description && (
+                  <p className="text-sm text-muted-foreground mt-1">{currentQuestion.description}</p>
+                )}
               </div>
+
+              {/* Impact feedback after selection */}
+              {selectedOption && (
+                <div className={`mb-4 p-3 rounded-lg text-sm ${isVisibilityGap ? 'bg-amber-50 border border-amber-200 text-amber-800' : 'bg-teal-50 border border-teal-200 text-teal-800'}`}>
+                  {isVisibilityGap && <AlertTriangle className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />}
+                  {selectedOption.impact}
+                </div>
+              )}
 
               {/* Options */}
               <div className="space-y-2">
                 {currentQuestion.options.map((option) => {
                   const isSelected = currentAnswer === option.value;
+                  const isGapOption = option.value === 0;
                   return (
                     <button
                       key={option.value}
@@ -887,22 +901,26 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
                       onClick={() => onAnswer(currentQuestion.id, option.value)}
                       className={`w-full flex items-start gap-3 p-4 rounded-xl border text-left transition-all ${
                         isSelected
-                          ? 'border-primary bg-primary/10 shadow-sm'
+                          ? isGapOption
+                            ? 'border-amber-400 bg-amber-50 shadow-sm'
+                            : 'border-primary bg-primary/10 shadow-sm'
                           : 'border-border bg-card hover:border-primary/30 hover:bg-primary/5'
                       }`}
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-sm font-bold border-2 transition-colors ${
                         isSelected
-                          ? 'bg-primary border-primary text-primary-foreground'
+                          ? isGapOption
+                            ? 'bg-amber-500 border-amber-500 text-white'
+                            : 'bg-primary border-primary text-primary-foreground'
                           : 'border-muted-foreground/30 text-muted-foreground'
                       }`}>
-                        {option.value}
+                        {isGapOption ? '?' : option.value}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium text-sm">{option.label}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">{option.description}</p>
+                        <p className={`font-medium text-sm ${isGapOption ? 'text-amber-700' : ''}`}>{option.label}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{option.impact}</p>
                       </div>
-                      {isSelected && <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />}
+                      {isSelected && <CheckCircle2 className={`w-5 h-5 shrink-0 mt-0.5 ${isGapOption ? 'text-amber-500' : 'text-primary'}`} />}
                     </button>
                   );
                 })}
@@ -928,7 +946,7 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
               </span>
             </div>
 
-            {currentIndex < questions.length - 1 ? (
+            {currentIndex < checkupQuestions.length - 1 ? (
               <Button onClick={goToNext}>
                 Próxima
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -941,10 +959,10 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
             )}
           </div>
 
-          {!allAnswered && currentIndex === questions.length - 1 && (
+          {!allAnswered && currentIndex === checkupQuestions.length - 1 && (
             <p className="text-xs text-amber-600 text-center mt-3">
               ⚠️ Responda todas as {TOTAL_QUESTIONS} questões para finalizar a avaliação.
-              Faltam {TOTAL_QUESTIONS - answeredCount}.
+              Faltam {TOTAL_QUESTIONS - totalAnswered}.
             </p>
           )}
         </div>
@@ -974,7 +992,6 @@ function ResultsScreen({ result, registrationData, onRestart }: {
     processo: 'Revise e atualize POPs, fortaleça o programa de monitoramento biológico e químico, implante auditorias internas sistemáticas, e padronize o fluxo de rastreabilidade de materiais em todas as etapas.',
     tecnologia: 'Invista em sistemas de gestão informatizados, implemente monitoramento digital em tempo real, estabeleça programa de manutenção preventiva calibrada, e avalie oportunidades de automação de processos repetitivos.',
     financeiro: 'Implemente controle detalhado de custos por categoria, realize análises de ROI antes de investimentos, otimize contratos com fornecedores, e crie um plano de redução de desperdícios com metas mensuráveis.',
-    lgpd: 'Formalize a nomeação do DPO, realize mapeamento completo de dados pessoais, implemente treinamentos periódicos sobre LGPD, e estabeleça um plano de resposta a incidentes de segurança da informação.',
   };
 
   const handleDownload = () => {
@@ -1029,6 +1046,11 @@ ${categoryLines}
 RECOMENDAÇÕES PRIORITÁRIAS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${recommendationLines}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LACUNAS DE VISIBILIDADE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${result.visibilityGaps.length > 0 ? result.visibilityGaps.map((g, i) => `  ${i + 1}. ${g}`).join('\n') : '  Nenhuma lacuna de visibilidade identificada.'}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1162,6 +1184,29 @@ Não substitui auditorias regulatórias oficiais.
           </CardContent>
         </Card>
 
+        {/* Visibility Gaps */}
+        {result.visibilityGaps.length > 0 && (
+          <Card className="border-0 shadow-lg mb-6 border-l-4 border-l-amber-400">
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center gap-2 text-amber-700">
+                <AlertTriangle className="w-5 h-5" />
+                Lacunas de Visibilidade
+              </CardTitle>
+              <CardDescription>
+                {result.visibilityGaps.length} {result.visibilityGaps.length === 1 ? 'pergunta sem informação clara' : 'perguntas sem informação clara'} — indicam necessidade de indicadores
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {result.visibilityGaps.map((gap, i) => (
+                <div key={i} className="flex items-start gap-2 text-sm text-amber-800 bg-amber-50 rounded-lg p-3">
+                  <span className="font-bold text-amber-500 shrink-0">{i + 1}.</span>
+                  <span>{gap}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        )}
+
         {/* Specialist Note */}
         <Card className="border-0 shadow-lg mb-8">
           <CardContent className="pt-6">
@@ -1204,28 +1249,44 @@ export default function Home() {
   const [registrationData, setRegistrationData] = useState<RegistrationData>({ name: '', position: '', phone: '', email: '', establishmentType: '', bedCount: '', cmeProfessionals: '', region: '', state: '' });
   const [consent1, setConsent1] = useState(false);
   const [consent2, setConsent2] = useState(false);
-  const [responses, setResponses] = useState<Map<number, number>>(new Map());
+  const [responses, setResponses] = useState<Map<string, number>>(new Map());
   const [result, setResult] = useState<AssessmentResult | null>(null);
 
   const calculateResults = useCallback(() => {
+    const visibilityGaps: string[] = [];
+
     const categoryScores: CategoryScore[] = CATEGORIES.map((cat) => {
-      const catQuestions = questions.filter(q => q.category === cat.key);
-      const catResponses = catQuestions.filter(q => responses.has(q.id));
-      const score = catResponses.reduce((sum, q) => sum + (responses.get(q.id) || 0), 0);
-      const maxScore = catQuestions.length * 5;
+      const catQuestions = checkupQuestions.filter(q => q.category === cat.key);
+      let score = 0;
+      let maxScore = 0;
+
+      catQuestions.forEach(q => {
+        const answer = responses.get(q.id);
+        if (answer !== undefined && answer > 0) {
+          score += answer * q.weight;
+          maxScore += 4 * q.weight;
+        }
+        // Collect visibility gaps
+        if (answer === 0) {
+          const opt = q.options.find(o => o.value === 0);
+          if (opt && opt.impact.startsWith('FALTA DE VISIBILIDADE')) {
+            visibilityGaps.push(q.question);
+          }
+        }
+      });
 
       return {
         category: cat.key,
         label: cat.label,
         score,
         maxScore,
-        percentage: (score / maxScore) * 100,
+        percentage: maxScore > 0 ? (score / maxScore) * 100 : 0,
       };
     });
 
     const totalScore = categoryScores.reduce((sum, cs) => sum + cs.score, 0);
     const totalMax = categoryScores.reduce((sum, cs) => sum + cs.maxScore, 0);
-    const totalPercentage = (totalScore / totalMax) * 100;
+    const totalPercentage = totalMax > 0 ? (totalScore / totalMax) * 100 : 0;
 
     const classification = getClassification(totalPercentage);
 
@@ -1240,6 +1301,7 @@ export default function Home() {
       classification,
       categoryScores,
       responses: responseArray,
+      visibilityGaps,
     });
   }, [responses]);
 
@@ -1259,7 +1321,7 @@ export default function Home() {
     setScreen('assessment');
   };
 
-  const handleAnswer = (questionId: number, answer: number) => {
+  const handleAnswer = (questionId: string, answer: number) => {
     setResponses(prev => {
       const next = new Map(prev);
       next.set(questionId, answer);

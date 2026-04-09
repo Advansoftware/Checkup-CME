@@ -1,4 +1,4 @@
-export type CategoryKey = 'gestao' | 'processo' | 'tecnologia' | 'financeiro' | 'lgpd';
+export type CategoryKey = 'gestao' | 'processo' | 'tecnologia' | 'financeiro';
 
 export interface CategoryInfo {
   key: CategoryKey;
@@ -11,14 +11,16 @@ export interface CategoryInfo {
 export interface QuestionOption {
   value: number;
   label: string;
-  description: string;
+  impact: string;
 }
 
 export interface Question {
-  id: number;
+  id: string;
   category: CategoryKey;
-  text: string;
+  question: string;
+  description?: string;
   options: QuestionOption[];
+  weight: number;
 }
 
 export type ScreenType = 'intro' | 'register1' | 'register2' | 'consent' | 'assessment' | 'results';
@@ -36,7 +38,7 @@ export interface RegistrationData {
 }
 
 export interface AssessmentResponse {
-  questionId: number;
+  questionId: string;
   answer: number;
 }
 
@@ -54,14 +56,14 @@ export interface AssessmentResult {
   classification: 'Excelente' | 'Bom' | 'Regular' | 'Precisa Melhorar';
   categoryScores: CategoryScore[];
   responses: AssessmentResponse[];
+  visibilityGaps: string[];
 }
 
 export const CATEGORIES: CategoryInfo[] = [
-  { key: 'gestao', label: 'Gestão', icon: '👔', questionCount: 10, color: '#0D9488' },
-  { key: 'processo', label: 'Processo', icon: '⚙️', questionCount: 13, color: '#059669' },
-  { key: 'tecnologia', label: 'Tecnologia', icon: '💻', questionCount: 15, color: '#0891B2' },
-  { key: 'financeiro', label: 'Financeiro', icon: '💰', questionCount: 10, color: '#D97706' },
-  { key: 'lgpd', label: 'LGPD', icon: '🔒', questionCount: 11, color: '#7C3AED' },
+  { key: 'gestao', label: 'Gestão', icon: '👔', questionCount: 9, color: '#0D9488' },
+  { key: 'processo', label: 'Processo', icon: '⚙️', questionCount: 12, color: '#059669' },
+  { key: 'tecnologia', label: 'Tecnologia', icon: '💻', questionCount: 9, color: '#0891B2' },
+  { key: 'financeiro', label: 'Financeiro e Riscos', icon: '💰', questionCount: 10, color: '#D97706' },
 ];
 
 export const ESTABLISHMENT_TYPES = [
@@ -153,8 +155,6 @@ export const REGIONS = [
     ],
   },
 ];
-
-export const TOTAL_QUESTIONS = 59;
 
 export function getClassification(percentage: number): AssessmentResult['classification'] {
   if (percentage >= 80) return 'Excelente';
