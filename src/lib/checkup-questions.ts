@@ -1827,40 +1827,6 @@ export const checkupQuestions: Question[] = [
     ],
     weight: 1,
   },
-  {
-    id: 'gestao_11',
-    category: 'gestao',
-    question: 'Qual a quantidade estimada de caixas cirúrgicas e kits gerenciados pela CME?',
-    description: 'O volume de caixas e kits indica a complexidade logística da operação.',
-    options: [
-      {
-        value: 1,
-        label: 'Até 100 caixas/kits',
-        impact: 'Arsenal pequeno, complexidade logística baixa, controle simplificado possível'
-      },
-      {
-        value: 2,
-        label: 'Entre 101 e 300 caixas/kits',
-        impact: 'Arsenal médio, exige organização estruturada para rastreabilidade'
-      },
-      {
-        value: 3,
-        label: 'Entre 301 e 500 caixas/kits',
-        impact: 'Arsenal grande, requer sistema robusto de gestão e controle'
-      },
-      {
-        value: 4,
-        label: 'Mais de 500 caixas/kits',
-        impact: 'Arsenal extenso, demanda sistema especializado e equipe capacitada'
-      },
-      {
-        value: 0,
-        label: 'Não possuo esta informação',
-        impact: 'FALTA DE VISIBILIDADE: desconhecer o volume do arsenal é um risco operacional'
-      },
-    ],
-    weight: 1,
-  },
 ];
 
 // Função para calcular o resultado do checkup
