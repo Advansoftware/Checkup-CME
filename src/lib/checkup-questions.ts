@@ -494,8 +494,8 @@ export const checkupQuestions: Question[] = [
   {
     id: 'processo_5',
     category: 'processo',
-    question: 'Sua CME realiza calibração das incubadoras para leitura de indicadores biológicos?',
-    description: 'Incubadoras calibradas garantem resultados confiáveis dos testes biológicos.',
+    question: 'Sua CME realiza calibração das incubadoras para leitura do Indicador Biológico (IB)?',
+    description: 'Incubadoras calibradas garantem resultados confiáveis do Indicador Biológico (IB).',
     options: [
       { 
         value: 1, 
@@ -528,12 +528,12 @@ export const checkupQuestions: Question[] = [
   {
     id: 'processo_6',
     category: 'processo',
-    question: 'Sua CME realiza teste de limpeza dos instrumentais após o expurgo?',
-    description: 'Testar a limpeza garante que os instrumentais estão adequados para esterilização.',
+    question: 'Sua CME realiza Teste de Limpeza (TL) dos instrumentais após o expurgo?',
+    description: 'O Teste de Limpeza (TL) garante que os instrumentais estão adequados para esterilização.',
     options: [
       { 
         value: 1, 
-        label: 'Não realizamos teste de limpeza',
+        label: 'Não realizamos Teste de Limpeza (TL)',
         impact: 'Instrumentais podem ser esterilizados sujos, falha no processo'
       },
       { 
@@ -543,18 +543,18 @@ export const checkupQuestions: Question[] = [
       },
       { 
         value: 3, 
-        label: 'Teste de limpeza em alguns lotes/ciclos',
+        label: 'Teste de Limpeza (TL) em alguns lotes/ciclos',
         impact: 'Controle parcial, alguns instrumentais podem não estar adequadamente limpos'
       },
       { 
         value: 4, 
-        label: 'Teste de limpeza padronizado e documentado para todos os ciclos',
+        label: 'Teste de Limpeza (TL) padronizado e documentado para todos os ciclos',
         impact: 'Garantia de limpeza, esterilização eficaz, conformidade total'
       },
       { 
         value: 0, 
         label: 'Não possuo esta informação',
-        impact: 'FALTA DE VISIBILIDADE: desconhecer o controle de limpeza é um risco'
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o controle do Teste de Limpeza (TL) é um risco'
       },
     ],
     weight: 2,
@@ -630,7 +630,7 @@ export const checkupQuestions: Question[] = [
   {
     id: 'processo_9',
     category: 'processo',
-    question: 'Como é feito o controle de testes e indicadores de processo (Bowie Dick, BI, CI)?',
+    question: 'Como é feito o controle dos testes: Bowie&Dick (B&D), Indicador Biológico (IB), Indicador Químico (IQ), Pacote Desafio (PCD), Helix, Teste de Limpeza (TL) e Teste de Selagem (TS)?',
     description: 'Testes de validação são obrigatórios e essenciais para segurança.',
     options: [
       { 
