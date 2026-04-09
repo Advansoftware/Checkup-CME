@@ -1413,6 +1413,420 @@ export const checkupQuestions: Question[] = [
     ],
     weight: 2,
   },
+
+  // ==================== NOVAS PERGUNTAS - PROCESSO ====================
+  {
+    id: 'processo_13',
+    category: 'processo',
+    question: 'Quais métodos de limpeza estão disponíveis no expurgo da sua CME?',
+    description: 'A diversidade de métodos de limpeza no expurgo impacta diretamente na qualidade do processamento.',
+    options: [
+      {
+        value: 1,
+        label: 'Apenas limpeza manual com escovas',
+        impact: 'Dependência exclusiva do trabalho manual, maior risco de falhas, baixa padronização'
+      },
+      {
+        value: 2,
+        label: 'Limpeza manual com escovas e sistema pressurizado de ar/água',
+        impact: 'Métodos complementares, mas sem automação para grandes volumes'
+      },
+      {
+        value: 3,
+        label: 'Escovas, sistema pressurizado e sistema de limpeza a vapor (steamer)',
+        impact: 'Boa diversidade de métodos, processo mais eficiente e padronizado'
+      },
+      {
+        value: 4,
+        label: 'Todos os métodos (escovas, pressurizado, steamer) integrados ao processo de limpeza',
+        impact: 'Processo de limpeza completo, máxima eficiência e padronização'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer os métodos de limpeza é um risco operacional'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'processo_14',
+    category: 'processo',
+    question: 'Sua CME possui lupa para inspeção de instrumentais na área de limpeza e preparo?',
+    description: 'A lupa é essencial para detectar sujidades e defeitos não visíveis a olho nu.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos lupa no setor',
+        impact: 'Inspeção limitada, defeitos e resíduos podem passar despercebidos'
+      },
+      {
+        value: 2,
+        label: 'Possuímos, mas não é utilizada de forma padronizada',
+        impact: 'Equipamento disponível, mas subutilizado pela equipe'
+      },
+      {
+        value: 3,
+        label: 'Possuímos e é utilizada em alguns instrumentais críticos',
+        impact: 'Inspeção parcial, instrumentais comuns podem passar sem verificação adequada'
+      },
+      {
+        value: 4,
+        label: 'Possuímos e é utilizada de forma padronizada para todos os instrumentais',
+        impact: 'Inspeção completa, detecção precoce de defeitos, qualidade garantida'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer a inspeção com lupa é um risco de qualidade'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'processo_15',
+    category: 'processo',
+    question: 'Sua CME possui armário de selagem? Quantas unidades?',
+    description: 'O armário de selagem garante a integridade do pacote e a efetividade da esterilização.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos armário de selagem',
+        impact: 'Risco de contaminação pós-esterilização, selagem manual sem controle'
+      },
+      {
+        value: 2,
+        label: 'Possuímos 1 unidade, mas pode ser insuficiente para a demanda',
+        impact: 'Gargalo operacional, risco de fila e atraso no preparo'
+      },
+      {
+        value: 3,
+        label: 'Possuímos 2 a 3 unidades para atendimento da demanda',
+        impact: 'Boa capacidade, atendimento adequado ao volume de processamento'
+      },
+      {
+        value: 4,
+        label: 'Possuímos 4 ou mais unidades, dimensionadas para a demanda',
+        impact: 'Capacidade plena, sem gargalos, selagem padronizada e eficiente'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o equipamento de selagem é um risco operacional'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'processo_16',
+    category: 'processo',
+    question: 'Que tipos de desinfecção sua CME realiza?',
+    description: 'A desinfecção é etapa crítica para redução de carga microbiana antes da esterilização.',
+    options: [
+      {
+        value: 1,
+        label: 'Não realizamos desinfecção de forma padronizada',
+        impact: 'Ausência de desinfecção, risco elevado de contaminação cruzada'
+      },
+      {
+        value: 2,
+        label: 'Realizamos apenas desinfecção química',
+        impact: 'Processo parcial, dependência de produtos químicos sem validação térmica'
+      },
+      {
+        value: 3,
+        label: 'Realizamos apenas desinfecção térmica',
+        impact: 'Processo térmico eficaz, mas sem alternativa para materiais termossensíveis'
+      },
+      {
+        value: 4,
+        label: 'Realizamos desinfecção química e térmica conforme protocolos',
+        impact: 'Processo completo, cobrindo todos os tipos de materiais, conformidade total'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer os tipos de desinfecção é um risco assistencial'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'processo_17',
+    category: 'processo',
+    question: 'Sua CME possui controle de temperatura de ambiente nos setores (Expurgo, Preparo, Esterilização e Arsenal)?',
+    description: 'O controle de temperatura é fundamental para conservação de materiais e conforto da equipe.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos controle de temperatura em nenhum setor',
+        impact: 'Risco para materiais, desconforto da equipe, não conformidade com normas'
+      },
+      {
+        value: 2,
+        label: 'Controle parcial (apenas em alguns setores)',
+        impact: 'Alguns setores protegidos, outros sem monitoramento adequado'
+      },
+      {
+        value: 3,
+        label: 'Controle em todos os setores, mas sem alertas automáticos',
+        impact: 'Monitoramento existe, mas resposta lenta a variações críticas'
+      },
+      {
+        value: 4,
+        label: 'Controle em todos os setores (Expurgo, Preparo, Esterilização e Arsenal) com alertas automáticos',
+        impact: 'Ambientes controlados, conformidade total, resposta imediata a variações'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o controle de temperatura é um risco operacional'
+      },
+    ],
+    weight: 2,
+  },
+
+  // ==================== NOVAS PERGUNTAS - TECNOLOGIA ====================
+  {
+    id: 'tecnologia_10',
+    category: 'tecnologia',
+    question: 'Sua CME possui lavadoras ultrassônicas? Quantas unidades?',
+    description: 'Lavadoras ultrassônicas garantem limpeza eficiente de instrumentais com lúmenes e articulações.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos lavadoras ultrassônicas',
+        impact: 'Dependência de limpeza manual, risco de resíduos em instrumentais complexos'
+      },
+      {
+        value: 2,
+        label: 'Possuímos 1 unidade, mas pode ser insuficiente para a demanda',
+        impact: 'Gargalo operacional, filas de processamento, risco de atraso'
+      },
+      {
+        value: 3,
+        label: 'Possuímos 2 a 3 unidades para atendimento da demanda',
+        impact: 'Boa capacidade, processamento adequado ao volume da CME'
+      },
+      {
+        value: 4,
+        label: 'Possuímos 4 ou mais unidades, dimensionadas para a demanda',
+        impact: 'Capacidade plena, sem gargalos, limpeza eficiente garantida'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o parque de lavadoras é um gap tecnológico'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'tecnologia_11',
+    category: 'tecnologia',
+    question: 'Sua CME possui termodesinfectoradoras (lavadoras termodesinfectoras)? Quantas unidades?',
+    description: 'Termodesinfectoradoras unificam lavagem e desinfecção térmica em um único ciclo.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos termodesinfectoradoras',
+        impact: 'Processo de desinfecção manual ou em etapas separadas, menor eficiência'
+      },
+      {
+        value: 2,
+        label: 'Possuímos 1 unidade, mas pode ser insuficiente para a demanda',
+        impact: 'Gargalo operacional, dependência de processo manual complementar'
+      },
+      {
+        value: 3,
+        label: 'Possuímos 2 a 3 unidades para atendimento da demanda',
+        impact: 'Boa capacidade, processo integrado de lavagem e desinfecção'
+      },
+      {
+        value: 4,
+        label: 'Possuímos 4 ou mais unidades, dimensionadas para a demanda',
+        impact: 'Capacidade plena, processo automatizado de alta eficiência'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer as termodesinfectoradoras é um gap tecnológico'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'tecnologia_12',
+    category: 'tecnologia',
+    question: 'Sua CME possui autoclaves? Quais tipos e quantidades?',
+    description: 'A diversidade de tecnologias de esterilização amplia a capacidade de processamento de diferentes materiais.',
+    options: [
+      {
+        value: 1,
+        label: 'Possuímos apenas autoclaves a vapor',
+        impact: 'Limitação para materiais termossensíveis, dependência de esterilização externa'
+      },
+      {
+        value: 2,
+        label: 'Possuímos vapor e peróxido de hidrogênio',
+        impact: 'Boa cobertura, atende materiais termossensíveis com tecnologia complementar'
+      },
+      {
+        value: 3,
+        label: 'Possuímos vapor, peróxido de hidrogênio e plasma',
+        impact: 'Tecnologia diversificada, cobertura quase total de todos os tipos de materiais'
+      },
+      {
+        value: 4,
+        label: 'Possuímos todos os tipos (vapor, peróxido e plasma) em quantidade adequada à demanda',
+        impact: 'Parque tecnológico completo, autossuficiência, máxima versatilidade'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer os tipos de autoclaves é um gap crítico'
+      },
+    ],
+    weight: 3,
+  },
+  {
+    id: 'tecnologia_13',
+    category: 'tecnologia',
+    question: 'A instituição possui engenharia clínica própria ou terceirizada?',
+    description: 'A engenharia clínica é essencial para manutenção preventiva e qualificação de equipamentos.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos engenharia clínica (própria ou terceirizada)',
+        impact: 'Risco grave: equipamentos sem suporte técnico, manutenção sem planejamento'
+      },
+      {
+        value: 2,
+        label: 'Possuímos engenharia clínica terceirizada, com atendimento eventual',
+        impact: 'Suporte parcial, atendimento por demanda, sem acompanhamento contínuo'
+      },
+      {
+        value: 3,
+        label: 'Possuímos engenharia clínica terceirizada com contrato ativo',
+        impact: 'Suporte estruturado, manutenção planejada, mas sem equipe exclusiva'
+      },
+      {
+        value: 4,
+        label: 'Possuímos engenharia clínica própria dedicada',
+        impact: 'Suporte técnico completo, resposta imediata, gestão preventiva efetiva'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o suporte de engenharia clínica é um risco'
+      },
+    ],
+    weight: 2,
+  },
+  {
+    id: 'tecnologia_14',
+    category: 'tecnologia',
+    question: 'A instituição possui acreditações hospitalares (ONA, JCI, Qmentum)?',
+    description: 'Acreditações demonstram compromisso com qualidade e segurança assistencial.',
+    options: [
+      {
+        value: 1,
+        label: 'Não possuímos nenhuma acreditação',
+        impact: 'Sem certificação de qualidade reconhecida, possível desvantagem competitiva'
+      },
+      {
+        value: 2,
+        label: 'Estamos em processo de acreditação',
+        impact: 'Compromisso com qualidade, mas ainda sem certificação formal'
+      },
+      {
+        value: 3,
+        label: 'Possuímos acreditação ONA (nível 1 ou 2)',
+        impact: 'Certificação nacional reconhecida, processo de melhoria contínua em curso'
+      },
+      {
+        value: 4,
+        label: 'Possuímos ONA nível 3 e/ou acreditações internacionais (JCI, Qmentum)',
+        impact: 'Excelência em qualidade, reconhecimento nacional e internacional'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer acreditações é um gap de governança'
+      },
+    ],
+    weight: 2,
+  },
+
+  // ==================== NOVAS PERGUNTAS - GESTÃO ====================
+  {
+    id: 'gestao_10',
+    category: 'gestao',
+    question: 'Qual a natureza jurídica da instituição?',
+    description: 'A natureza jurídica influencia regulamentações, financiamento e gestão do estabelecimento.',
+    options: [
+      {
+        value: 1,
+        label: 'Hospital Público (SUS)',
+        impact: 'Depende de financiamento público, sujeito a limitações orçamentárias e processos de compra'
+      },
+      {
+        value: 2,
+        label: 'Hospital Privado (Lucrativo)',
+        impact: 'Maior flexibilidade de investimento, foco em resultado e eficiência'
+      },
+      {
+        value: 3,
+        label: 'Hospital Filantrópico (Sem fins lucrativos)',
+        impact: 'Mistura de financiamento público e privado, desafios de sustentabilidade'
+      },
+      {
+        value: 4,
+        label: 'Gerido por OSS (Organização Social de Saúde)',
+        impact: 'Gestão híbrida com metodologia privada e financiamento público, potencial de eficiência'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer a natureza jurídica é um gap institucional'
+      },
+    ],
+    weight: 1,
+  },
+  {
+    id: 'gestao_11',
+    category: 'gestao',
+    question: 'Qual a quantidade estimada de caixas cirúrgicas e kits gerenciados pela CME?',
+    description: 'O volume de caixas e kits indica a complexidade logística da operação.',
+    options: [
+      {
+        value: 1,
+        label: 'Até 100 caixas/kits',
+        impact: 'Arsenal pequeno, complexidade logística baixa, controle simplificado possível'
+      },
+      {
+        value: 2,
+        label: 'Entre 101 e 300 caixas/kits',
+        impact: 'Arsenal médio, exige organização estruturada para rastreabilidade'
+      },
+      {
+        value: 3,
+        label: 'Entre 301 e 500 caixas/kits',
+        impact: 'Arsenal grande, requer sistema robusto de gestão e controle'
+      },
+      {
+        value: 4,
+        label: 'Mais de 500 caixas/kits',
+        impact: 'Arsenal extenso, demanda sistema especializado e equipe capacitada'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: desconhecer o volume do arsenal é um risco operacional'
+      },
+    ],
+    weight: 1,
+  },
 ];
 
 // Função para calcular o resultado do checkup
