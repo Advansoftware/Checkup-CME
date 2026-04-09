@@ -205,7 +205,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
                   Neste check-up, o nome da sua instituição <strong className="text-gray-900">não será solicitado</strong>. A proposta é permitir que você responda com mais liberdade, segurança e sinceridade. Acredito que você tenha as informações necessárias para realizar essa jornada com consciência, e você pode seguir com tranquilidade.
                 </p>
                 <p className="font-semibold text-gray-900">
-                  Clique no botão abaixo e comece agora.
+                  Clique no botão abaixo e comece sua jornada do checkup CME Inteligente AGORA.
                 </p>
               </div>
             </CardContent>
