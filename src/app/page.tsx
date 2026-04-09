@@ -89,73 +89,68 @@ function CircularProgress({ percentage, size = 180, strokeWidth = 12, label }: {
 // ============================
 function IntroScreen({ onStart }: { onStart: () => void }) {
   return (
-    <div className="animate-fade-in min-h-screen flex flex-col">
-      {/* Hero */}
-      <section className="relative medical-gradient text-white py-16 px-4 sm:py-24">
+    <div className="animate-fade-in min-h-screen flex flex-col bg-white">
+      {/* Top Section - Title & Subtitle */}
+      <section className="pt-12 sm:pt-16 pb-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-            <HeartPulse className="w-4 h-4" />
-            <span className="text-sm font-medium">Avaliação Inteligente para CMEs</span>
+          <div className="inline-flex items-center gap-2 bg-teal-50 rounded-full px-4 py-2 mb-6">
+            <HeartPulse className="w-4 h-4 text-teal-600" />
+            <span className="text-sm font-medium text-teal-700">Diagnóstico de Gestão, Processo e Tecnologia</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Checkup CME
-            <span className="block text-white/90">Inteligente</span>
+            <span className="block text-teal-600">Inteligente</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Avalie a conformidade e a maturidade do seu Centro de Material Esterilizado
-            com base em 59 questões distribuídas em 5 dimensões essenciais.
-            Receba um laudo personalizado com recomendações práticas.
+          <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+            Descubra o ranking da sua CME e receba um laudo personalizado com recomendações
           </p>
         </div>
-        {/* Decorative elements */}
-        <div className="absolute top-8 left-8 w-24 h-24 bg-white/5 rounded-full blur-xl" />
-        <div className="absolute bottom-8 right-8 w-32 h-32 bg-white/5 rounded-full blur-xl" />
       </section>
 
-      <div className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 -mt-8 relative z-10 pb-16">
+      <div className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 pb-16">
         {/* Benefits */}
         <div className="grid sm:grid-cols-3 gap-4 mb-10">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="border border-gray-100 shadow-md hover:shadow-lg transition-shadow bg-white">
             <CardContent className="pt-6 flex flex-col items-center text-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-teal-50 flex items-center justify-center">
-                <ClipboardList className="w-7 h-7 text-teal-600" />
+              <div className="w-14 h-14 rounded-full bg-sky-50 flex items-center justify-center">
+                <FileText className="w-7 h-7 text-sky-500" />
               </div>
-              <h3 className="font-semibold text-lg">Laudo Detalhado</h3>
-              <p className="text-sm text-muted-foreground">
-                Relatório completo com pontuação por categoria e análise de conformidade.
+              <h3 className="font-semibold text-lg text-gray-900">Laudo Personalizado</h3>
+              <p className="text-sm text-gray-500">
+                Receba um diagnóstico completo com pontos críticos e recomendações específicas para sua CME.
               </p>
             </CardContent>
           </Card>
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="border border-gray-100 shadow-md hover:shadow-lg transition-shadow bg-white">
             <CardContent className="pt-6 flex flex-col items-center text-center gap-3">
               <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center">
-                <DollarSign className="w-7 h-7 text-emerald-600" />
+                <TrendingUp className="w-7 h-7 text-emerald-500" />
               </div>
-              <h3 className="font-semibold text-lg">Economia Comprovada</h3>
-              <p className="text-sm text-muted-foreground">
-                Identifique oportunidades de redução de custos e otimização de recursos.
+              <h3 className="font-semibold text-lg text-gray-900">Economia Estimada</h3>
+              <p className="text-sm text-gray-500">
+                Saiba quanto sua CME pode economizar com melhorias em processos e tecnologia.
               </p>
             </CardContent>
           </Card>
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="border border-gray-100 shadow-md hover:shadow-lg transition-shadow bg-white">
             <CardContent className="pt-6 flex flex-col items-center text-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-cyan-50 flex items-center justify-center">
-                <Target className="w-7 h-7 text-cyan-600" />
+              <div className="w-14 h-14 rounded-full bg-violet-50 flex items-center justify-center">
+                <Target className="w-7 h-7 text-violet-500" />
               </div>
-              <h3 className="font-semibold text-lg">Plano de Ação</h3>
-              <p className="text-sm text-muted-foreground">
-                Recomendações priorizadas com base nos pontos mais críticos identificados.
+              <h3 className="font-semibold text-lg text-gray-900">Plano de Ação</h3>
+              <p className="text-sm text-gray-500">
+                Quick wins e próximos passos claros para transformar sua CME.
               </p>
             </CardContent>
           </Card>
         </div>
 
         {/* Categories */}
-        <Card className="mb-10 border-0 shadow-lg">
+        <Card className="mb-10 border border-gray-100 shadow-md bg-white">
           <CardHeader>
-            <CardTitle className="text-xl flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-primary" />
-              Dimensões da Avaliação
+            <CardTitle className="text-xl flex items-center gap-2 text-gray-900">
+              <BarChart3 className="w-5 h-5 text-teal-600" />
+              O Checkup Avalia 5 Dimensões
             </CardTitle>
             <CardDescription>
               {TOTAL_QUESTIONS} questões distribuídas em 5 categorias estratégicas
@@ -166,11 +161,11 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
               {CATEGORIES.map((cat) => (
                 <div
                   key={cat.key}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl border bg-card hover:border-primary/30 hover:bg-primary/5 transition-colors cursor-default"
+                  className="flex flex-col items-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:border-teal-200 hover:bg-teal-50/50 transition-colors cursor-default"
                 >
                   <span className="text-2xl">{cat.icon}</span>
-                  <span className="font-medium text-sm">{cat.label}</span>
-                  <Badge variant="secondary" className="text-xs">
+                  <span className="font-medium text-sm text-gray-800">{cat.label}</span>
+                  <Badge variant="secondary" className="text-xs bg-white border border-gray-200">
                     {cat.questionCount} questões
                   </Badge>
                 </div>
@@ -179,23 +174,42 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           </CardContent>
         </Card>
 
-        {/* Specialist */}
-        <Card className="mb-10 border-0 shadow-lg">
-          <CardContent className="pt-6">
-            <div className="flex flex-col sm:flex-row items-center gap-5">
-              <div className="w-20 h-20 rounded-full medical-gradient flex items-center justify-center text-white shrink-0">
-                <User className="w-10 h-10" />
-              </div>
-              <div className="text-center sm:text-left">
-                <h3 className="font-bold text-lg">Klever Oliveira Lopes</h3>
-                <p className="text-sm text-muted-foreground mb-1">Especialista em Esterilização e CME</p>
-                <p className="text-xs text-muted-foreground">
-                  Consultor especializado em Centro de Material Esterilizado com ampla experiência
-                  em conformidade regulatória, gestão de processos e otimização de CMEs.
-                </p>
+        {/* Klever's Section - Photo + Message */}
+        <Card className="mb-10 border border-gray-100 shadow-md overflow-hidden">
+          <div className="md:flex">
+            {/* Photo */}
+            <div className="md:w-80 shrink-0 bg-gradient-to-br from-teal-50 to-emerald-50 flex items-center justify-center p-8">
+              <div className="relative">
+                <img
+                  src="/klever-lopes-2.jpg"
+                  alt="Klever Lopes - Especialista em CME"
+                  className="w-52 h-52 sm:w-60 sm:h-60 rounded-full object-cover border-4 border-white shadow-lg"
+                />
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-600 text-white text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap shadow-md">
+                  Especialista em CME
+                </div>
               </div>
             </div>
-          </CardContent>
+            {/* Message */}
+            <CardContent className="pt-8 pb-8 px-6 sm:px-8 flex flex-col justify-center">
+              <h3 className="font-bold text-xl text-gray-900 mb-1">Klever Lopes</h3>
+              <p className="text-sm text-teal-600 font-medium mb-5">Especialista em Esterilização e CME</p>
+              <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
+                <p>
+                  Eu sou <strong className="text-gray-900">Klever Lopes</strong>, especialista em CME, e estou disponibilizando <strong className="text-gray-900">gratuitamente, por tempo limitado</strong>, este Check Up CME INTELIGENTE para ajudar você, gestor, a fazer uma leitura mais clara, estratégica e sincera da sua operação.
+                </p>
+                <p>
+                  Para que o resultado tenha qualidade, preciso que suas respostas sejam francas e conscientes. Eu sei que o seu dia é corrido, mas reserve esse momento para se conectar com a realidade da sua CME. Essa pode ser uma experiência reveladora e muito valiosa para sua gestão.
+                </p>
+                <p>
+                  Neste check-up, o nome da sua instituição <strong className="text-gray-900">não será solicitado</strong>. A proposta é permitir que você responda com mais liberdade, segurança e sinceridade. Acredito que você tenha as informações necessárias para realizar essa jornada com consciência, e você pode seguir com tranquilidade.
+                </p>
+                <p className="font-semibold text-gray-900">
+                  Clique no botão abaixo e comece agora.
+                </p>
+              </div>
+            </CardContent>
+          </div>
         </Card>
 
         {/* CTA */}
@@ -203,13 +217,13 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           <Button
             onClick={onStart}
             size="lg"
-            className="medical-gradient border-0 text-white hover:opacity-90 shadow-lg px-8 py-6 text-base font-semibold rounded-xl h-auto"
+            className="bg-teal-600 hover:bg-teal-700 border-0 text-white shadow-lg px-10 py-6 text-base font-semibold rounded-xl h-auto"
           >
             Iniciar Checkup Gratuito
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
-          <p className="text-xs text-muted-foreground mt-3">
-            ⏱ Duração estimada: 15-20 minutos • 100% gratuito
+          <p className="text-xs text-gray-400 mt-3">
+            ⏱ Duração estimada: 15-20 minutos • 100% gratuito • Por tempo limitado
           </p>
         </div>
       </div>
