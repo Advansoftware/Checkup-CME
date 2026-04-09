@@ -928,7 +928,7 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
             </div>
 
             {currentIndex < checkupQuestions.length - 1 ? (
-              <Button onClick={goToNext}>
+              <Button onClick={goToNext} disabled={currentAnswer === null}>
                 Próxima
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -946,6 +946,11 @@ function AssessmentScreen({ responses, onAnswer, onFinish }: {
               Faltam {TOTAL_QUESTIONS - totalAnswered}.
             </p>
           )}
+
+          {/* Copyright footer */}
+          <p className="text-[10px] text-gray-400 text-center mt-8 leading-relaxed max-w-lg mx-auto">
+            Material exclusivo e de propriedade da CME INTELIGENTE. Metodologia, lógica de dados, estrutura técnica e perguntas desenvolvidas por Klever Oliveira Lopes. Proibida a reprodução total ou parcial, replicação, adaptação, distribuição ou utilização sem autorização expressa.
+          </p>
         </div>
       </div>
     </div>
