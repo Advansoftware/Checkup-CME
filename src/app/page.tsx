@@ -636,41 +636,22 @@ function ConsentScreen({ consent1, consent2, onConsentChange, onStart, onBack }:
               </p>
               <Separator />
               <p>
-                Ao realizar este checkup, você consente com a coleta e o tratamento dos dados
-                informados, incluindo nome, cargo, telefone, email, tipo de estabelecimento,
-                dados operacionais e as respostas fornecidas no questionário de avaliação.
+                <strong className="text-foreground">Finalidade:</strong> Os dados coletados serão utilizados exclusivamente para a geração do laudo de avaliação do CME, identificação de oportunidades de melhoria e elaboração de recomendações personalizadas para o seu estabelecimento de saúde.
               </p>
               <p>
-                <strong className="text-foreground">Finalidade:</strong> Os dados coletados serão utilizados
-                exclusivamente para a geração do laudo de avaliação do CME, identificação de
-                oportunidades de melhoria e elaboração de recomendações personalizadas para
-                o seu estabelecimento de saúde.
+                <strong className="text-foreground">Base Legal:</strong> O tratamento dos dados é fundamentado no consentimento do titular (Art. 7º, I, Lei nº 13.709/2018 - LGPD) e no legítimo interesse do controlador para fins de melhoria contínua de serviços de saúde.
               </p>
               <p>
-                <strong className="text-foreground">Base Legal:</strong> O tratamento dos dados é fundamentado
-                no consentimento do titular (Art. 7º, I, Lei nº 13.709/2018 - LGPD) e no
-                legítimo interesse do controlador para fins de melhoria contínua de serviços
-                de saúde.
+                <strong className="text-foreground">Compartilhamento:</strong> Ao realizar este checkup, você consente com a coleta e o tratamento dos dados informados, incluindo nome, cargo, telefone, email, tipo de estabelecimento, dados operacionais e as respostas fornecidas no questionário de avaliação. Os dados não serão compartilhados com terceiros sem o seu consentimento expresso, exceto quando necessário para o cumprimento de obrigação legal ou regulatória.
               </p>
               <p>
-                <strong className="text-foreground">Compartilhamento:</strong> Os dados não serão compartilhados
-                com terceiros sem o seu consentimento expresso, exceto quando necessário para
-                o cumprimento de obrigação legal ou regulatória.
+                <strong className="text-foreground">Retenção:</strong> Os dados serão mantidos pelo período necessário para cumprir as finalidades descritas, ou até que o titular solicite a exclusão, conforme previsto na LGPD.
               </p>
               <p>
-                <strong className="text-foreground">Retenção:</strong> Os dados serão mantidos pelo período
-                necessário para cumprir as finalidades descritas, ou até que o titular solicite
-                a exclusão, conforme previsto na LGPD.
+                <strong className="text-foreground">Direitos do Titular:</strong> Você pode acessar, corrigir, anonimizar, portabilizar, eliminar ou revogar o consentimento a qualquer momento, entrando em contato com o Encarregado de Proteção de Dados.
               </p>
               <p>
-                <strong className="text-foreground">Direitos do Titular:</strong> Você pode acessar, corrigir,
-                anonimizar, portabilizar, eliminar ou revogar o consentimento a qualquer
-                momento, entrando em contato com o Encarregado de Proteção de Dados.
-              </p>
-              <p>
-                <strong className="text-foreground">Segurança:</strong> Adotamos medidas técnicas e organizacionais
-                adequadas para proteger seus dados pessoais contra acesso não autorizado,
-                perda, alteração ou destruição.
+                <strong className="text-foreground">Segurança:</strong> Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais contra acesso não autorizado, perda, alteração ou destruição.
               </p>
             </div>
 
