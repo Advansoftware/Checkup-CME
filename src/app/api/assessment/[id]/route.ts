@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
@@ -34,10 +36,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: NextRequest) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
@@ -73,7 +77,13 @@ export async function PUT(request: NextRequest) {
     if (financialLossEdited !== undefined) updateData.financialLossEdited = financialLossEdited;
 
     if (visibleSections !== undefined) {
-      updateData.resultJson = JSON.stringify({ visibleSections });
+      try {
+        const existingJson = assessment.resultJson ? JSON.parse(assessment.resultJson as string) : {};
+        existingJson.visibleSections = visibleSections;
+        updateData.resultJson = JSON.stringify(existingJson);
+      } catch {
+        updateData.resultJson = JSON.stringify({ visibleSections });
+      }
     }
 
     if (status === 'released') {

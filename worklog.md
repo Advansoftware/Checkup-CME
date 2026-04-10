@@ -54,3 +54,20 @@ Changed the assessment flow so results are NOT shown directly to users. Instead,
 - `bun run lint` — passed with no errors
 - `npx next build` — compiled and built successfully
 - All routes confirmed: /, /admin, /api/assessment, /api/assessment/[id], /api/assessments, /resultado/[id]
+
+---
+Task ID: 1
+Agent: Main Agent
+Task: Corrigir bug "ID não fornecido" e sobrescrita de resultJson
+
+Work Log:
+- Investigado erro: API route `[id]` lia ID de `searchParams` em vez de `params` do route segment
+- Corrigido GET e PUT em `/src/app/api/assessment/[id]/route.ts`: substituído `searchParams.get('id')` por `const { id } = await params`
+- Corrigido segundo bug: `visibleSections` sobrescrevia todo `resultJson` (perdia scores, respostas, etc.)
+- Agora faz merge: parseia `resultJson` existente e adiciona `visibleSections` preservando dados anteriores
+
+Stage Summary:
+- Corrigidos 2 bugs críticos na API de assessment:
+  1. "ID não fornecido" — params agora lidos corretamente do route segment
+  2. Destruição de dados — visibleSections agora é mesclado no resultJson existente
+- Arquivo corrigido: `src/app/api/assessment/[id]/route.ts`
