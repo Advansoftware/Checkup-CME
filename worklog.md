@@ -71,3 +71,22 @@ Stage Summary:
   1. "ID não fornecido" — params agora lidos corretamente do route segment
   2. Destruição de dados — visibleSections agora é mesclado no resultJson existente
 - Arquivo corrigido: `src/app/api/assessment/[id]/route.ts`
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Adicionar mensagem de abertura personalizada com foto e logo na página de resultados
+
+Work Log:
+- Adicionada seção de abertura personalizada no topo da página de resultados (`/resultado/[id]/page.tsx`)
+- Header com gradiente teal-emerald contendo logo CME Inteligente (esquerda) e foto do Klever + nome (direita)
+- Texto completo do Klever com 5 parágrafos de boas-vindas e convite para próxima etapa
+- Linha separadora com "Logo abaixo, você poderá visualizar o seu relatório."
+- Copiado logo sem fundo para `/public/logo-cme-inteligente.png`
+- Foto do Klever já existia em `/public/klever-lopes.jpg`
+- Build passou sem erros
+
+Stage Summary:
+- Página de resultados agora abre com card personalizado do Klever Oliveira Lopes
+- Layout: barra superior com logo + foto → texto de boas-vindas → relatório completo
+- Arquivos alterados: `src/app/resultado/[id]/page.tsx`, `public/logo-cme-inteligente.png`

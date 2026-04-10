@@ -384,6 +384,49 @@ Não substitui auditorias regulatórias oficiais.
 
       <div className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 -mt-6 relative z-10 pb-16 space-y-6">
 
+        {/* ===== PERSONALIZED INTRO MESSAGE ===== */}
+        <Card className="border-0 shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <img src="/logo-cme-inteligente.png" alt="CME Inteligente" className="h-10 sm:h-12 object-contain brightness-0 invert" />
+              <span className="text-white/80 text-sm font-medium hidden sm:block">Check-up CME Inteligente</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="text-right hidden sm:block">
+                <p className="text-white text-sm font-semibold">Klever Oliveira Lopes</p>
+                <p className="text-white/70 text-xs">Especialista em CME</p>
+              </div>
+              <img src="/klever-lopes.jpg" alt="Klever Oliveira Lopes" className="w-12 h-12 rounded-full border-2 border-white/30 object-cover shadow-md" />
+            </div>
+          </div>
+          <CardContent className="pt-6 pb-6">
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p className="text-base font-medium text-gray-900">
+                Foi muito importante ter você comigo nesta jornada do Check-up CME INTELIGENTE.
+              </p>
+              <p className="text-sm">
+                Espero que essa experiência tenha ajudado você a olhar para a sua CME com mais clareza, mais atenção e mais senso estratégico. A partir das respostas que você compartilhou, foi possível identificar percepções relevantes sobre a sua operação e sinalizar pontos que merecem atenção, fortalecimento e evolução.
+              </p>
+              <p className="text-sm">
+                Esta devolutiva representa uma leitura inicial do seu cenário, construída com base nas informações apresentadas ao longo do check-up. Ela não substitui uma análise técnica aprofundada, mas oferece um ponto de partida importante para apoiar suas reflexões, decisões e próximos passos.
+              </p>
+              <p className="text-sm">
+                Muitas vezes, identificar oportunidades de melhoria já é um grande avanço. Mas transformar essa percepção em um plano de ação mais consistente, em um diagnóstico mais robusto ou em uma proposta estruturada para apresentação à diretoria exige aprofundamento técnico e direcionamento estratégico.
+              </p>
+              <p className="text-sm">
+                Se você quiser avançar nessa próxima etapa, agende uma conversa comigo.
+                <br />
+                <span className="font-semibold text-teal-700">Terei prazer em ajudar você a aprofundar essa análise, esclarecer os pontos identificados no check-up e construir uma visão ainda mais completa da sua CME.</span>
+              </p>
+              <div className="pt-3 border-t">
+                <p className="text-sm text-muted-foreground text-center font-medium">
+                  Logo abaixo, você poderá visualizar o seu relatório.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Overall Score — ALWAYS VISIBLE */}
         <Card className="border-0 shadow-lg">
           <CardContent className="pt-8 pb-8 flex flex-col items-center">
