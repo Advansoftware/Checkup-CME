@@ -5,7 +5,7 @@ import {
   Shield, Eye, Copy, Check, Search, Filter,
   Lock, ChevronLeft, Users, AlertTriangle, Send,
   ArrowRight, HeartPulse, BarChart3, TrendingDown,
-  TrendingUp, AlertCircle, DollarSign, Zap,
+  TrendingUp, AlertCircle, DollarSign, Zap, Download,
   ArrowDownRight, ArrowUpRight, Minus, FileWarning,
   ShieldAlert, Activity, Target, Info
 } from 'lucide-react';
@@ -210,6 +210,7 @@ function Dashboard({ assessments, onViewDetail, onLogout }: {
 }) {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [downloading, setDownloading] = useState(false);
 
   const filtered = assessments.filter(a => {
     const matchesSearch = search === '' ||
@@ -226,6 +227,26 @@ function Dashboard({ assessments, onViewDetail, onLogout }: {
     sent: assessments.filter(a => a.status === 'sent').length,
   };
 
+  const handleDownloadZip = async () => {
+    setDownloading(true);
+    try {
+      const res = await fetch('/api/download?file=checkupcme.zip');
+      if (!res.ok) throw new Error();
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'checkupcme.zip';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      alert('Erro ao gerar download. Tente novamente.');
+    }
+    setDownloading(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -235,10 +256,16 @@ function Dashboard({ assessments, onViewDetail, onLogout }: {
             <HeartPulse className="w-6 h-6 text-teal-600" />
             <h1 className="text-lg font-bold text-gray-900">Painel Admin - CME Inteligente</h1>
           </div>
-          <Button variant="outline" size="sm" onClick={onLogout}>
-            <Lock className="w-4 h-4 mr-1" />
-            Sair
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={handleDownloadZip} disabled={downloading} className="bg-teal-50 text-teal-700 border-teal-200 hover:bg-teal-100">
+              <Download className="w-4 h-4 mr-1" />
+              {downloading ? 'Gerando...' : 'Baixar Sistema ZIP'}
+            </Button>
+            <Button variant="outline" size="sm" onClick={onLogout}>
+              <Lock className="w-4 h-4 mr-1" />
+              Sair
+            </Button>
+          </div>
         </div>
       </div>
 

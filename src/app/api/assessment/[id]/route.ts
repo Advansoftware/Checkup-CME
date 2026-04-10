@@ -59,6 +59,9 @@ export async function PUT(
       financialLossEdited,
       status,
       visibleSections,
+      responses,
+      resultJson,
+      totalScore,
     } = body;
 
     const assessment = await db.assessment.findUnique({ where: { id } });
@@ -75,8 +78,12 @@ export async function PUT(
     if (economyMaxEdited !== undefined) updateData.economyMaxEdited = economyMaxEdited;
     if (financialRiskLevelEdited !== undefined) updateData.financialRiskLevelEdited = financialRiskLevelEdited;
     if (financialLossEdited !== undefined) updateData.financialLossEdited = financialLossEdited;
+    if (responses !== undefined) updateData.responses = responses;
+    if (totalScore !== undefined) updateData.totalScore = totalScore;
 
-    if (visibleSections !== undefined) {
+    if (resultJson !== undefined) {
+      updateData.resultJson = typeof resultJson === 'string' ? resultJson : JSON.stringify(resultJson);
+    } else if (visibleSections !== undefined) {
       try {
         const existingJson = assessment.resultJson ? JSON.parse(assessment.resultJson as string) : {};
         existingJson.visibleSections = visibleSections;

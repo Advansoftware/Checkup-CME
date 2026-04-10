@@ -1827,6 +1827,618 @@ export const checkupQuestions: Question[] = [
     ],
     weight: 1,
   },
+
+  // ==================== NOVAS PERGUNTAS - PROCESSO (SANEANTES) ====================
+  {
+    id: 'processo_19',
+    category: 'processo',
+    question: 'Quais saneantes são utilizados na limpeza dos artigos e instrumentais na CME?',
+    description: 'A escolha correta dos saneantes é fundamental para a eficácia da descontaminação e limpeza dos materiais, conforme as recomendações da RDC 15/2012 e boas práticas.',
+    options: [
+      {
+        value: 4,
+        label: 'Detergente enzimático + neutro + alcalino (usos diferenciados conforme necessidade)',
+        impact: 'Excelente: a diversificação dos saneantes demonstra protocolo adequado, com seleção correta conforme tipo de sujidade e material. Isso reflete adesão às boas práticas e reduz riscos de danos aos instrumentais e falhas na limpeza.'
+      },
+      {
+        value: 3,
+        label: 'Utilizamos detergente enzimático e mais um tipo (neutro ou alcalino)',
+        impact: 'Bom nível de cobertura sanitária, com pelo menos duas opções de saneantes. Recomenda-se avaliar a necessidade de incluir um terceiro tipo para situações específicas de sujidade persistente.'
+      },
+      {
+        value: 2,
+        label: 'Utilizamos apenas um tipo de detergente para todas as situações',
+        impact: 'Risco moderado: o uso de um único tipo de saneante para todas as situações pode comprometer a eficácia da limpeza em instrumentais com sujidades específicas. Recomenda-se diversificar conforme protocolo.'
+      },
+      {
+        value: 1,
+        label: 'Não utilizamos saneantes específicos para CME / uso informal',
+        impact: 'Risco crítico: a ausência de saneantes adequados para CME compromete diretamente a qualidade da limpeza, a segurança da esterilização e pode gerar riscos aos pacientes e profissionais.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é essencial conhecer e padronizar os saneantes utilizados na CME conforme regulamentação vigente.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== NOVAS PERGUNTAS - PROCESSO (TRATAMENTO INSTRUMENTAIS) ====================
+  {
+    id: 'processo_20',
+    category: 'processo',
+    question: 'A CME realiza tratamento e manutenção dos instrumentais com uso de lubrificantes e desincrustantes?',
+    description: 'O uso de lubrificantes e desincrustantes é essencial para preservar a funcionalidade dos instrumentais cirúrgicos e garantir a eficácia do processo de limpeza.',
+    options: [
+      {
+        value: 4,
+        label: 'Sim, utilizamos lubrificante e desincrustante com frequência adequada (a cada processo ou conforme protocolo)',
+        impact: 'Excelente: o uso regular e protocolado de lubrificantes e desincrustantes preserva a vida útil dos instrumentais, evita travamentos, reduz corrosão e garante a eficácia da esterilização.'
+      },
+      {
+        value: 3,
+        label: 'Sim, utilizamos ambos, mas a frequência não é totalmente padronizada',
+        impact: 'Bom: o setor reconhece a importância dos produtos, mas a falta de padronização pode gerar inconsistências. Recomenda-se formalizar o protocolo com frequência definida.'
+      },
+      {
+        value: 2,
+        label: 'Utilizamos apenas um dos dois (lubrificante OU desincrustante)',
+        impact: 'Atenção: o uso parcial compromete etapas importantes do processo. O desincrustante remove resíduos mineralizados e o lubrificante protege articulações. Ambos são complementares.'
+      },
+      {
+        value: 1,
+        label: 'Não utilizamos lubrificante nem desincrustante',
+        impact: 'Risco crítico: a ausência desses produtos acelera o desgaste dos instrumentais, compromete a qualidade da limpeza e pode gerar perda patrimonial significativa e riscos cirúrgicos.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear o uso de insumos de manutenção dos instrumentais para preservação patrimonial e segurança do paciente.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== NOVAS PERGUNTAS - PROCESSO (IDENTIFICAÇÃO DE CAIXAS) ====================
+  {
+    id: 'processo_21',
+    category: 'processo',
+    question: 'Como é realizada a identificação das caixas por especialidade e tipos de instrumentais?',
+    description: 'A identificação visual adequada das caixas é essencial para rastreabilidade, organização, agilidade no preparo e redução de erros cirúrgicos.',
+    options: [
+      {
+        value: 4,
+        label: 'Identificação completa com cores por especialidade + etiquetas com nome e conteúdo detalhado',
+        impact: 'Excelente: sistema de identificação robusto que facilita a rastreabilidade, reduz erros de preparo, agiliza o processo de separação e contribui para a segurança cirúrgica.'
+      },
+      {
+        value: 3,
+        label: 'Usamos marcação por cor (fita ou tinta) por especialidade',
+        impact: 'Bom: a codificação por cores é uma prática eficaz. Recomenda-se complementar com etiquetas descritivas para maior detalhamento do conteúdo.'
+      },
+      {
+        value: 2,
+        label: 'Identificação parcial (apenas nome da especialidade, sem padronização de cores)',
+        impact: 'Atenção: a identificação parcial pode gerar confusão, erros de preparo e lentidão no processo. A padronização visual é recomendada.'
+      },
+      {
+        value: 1,
+        label: 'Sem identificação padronizada / identificação informal',
+        impact: 'Risco crítico: a falta de identificação adequada compromete a rastreabilidade, aumenta o risco de erros cirúrgicos e dificulta o controle de inventário.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é essencial mapear e padronizar o sistema de identificação de caixas para segurança e eficiência operacional.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== NOVAS PERGUNTAS - GESTÃO (CARGA HORÁRIA) ====================
+  {
+    id: 'gestao_11',
+    category: 'gestao',
+    question: 'Qual é o regime de carga horária de funcionamento da CME?',
+    description: 'O regime de funcionamento impacta diretamente na capacidade operativa, na qualidade dos processos, na gestão de equipe e na continuidade do atendimento cirúrgico.',
+    options: [
+      {
+        value: 4,
+        label: '12x36 ou 24x72 (escala com descanso adequado) com plantão noturno',
+        impact: 'Boa cobertura: escala com descanso preservado favorece a qualidade do trabalho e reduz fadiga. Plantão noturno garante continuidade para emergências.'
+      },
+      {
+        value: 3,
+        label: '8 horas diárias, 5 a 6 dias por semana (jornada comercial estendida)',
+        impact: 'Cobertura adequada para demanda regular. Se houver cirurgias fora do horário, pode haver necessidade de reestruturação para atendimento emergencial.'
+      },
+      {
+        value: 2,
+        label: '8 horas diárias, apenas jornada comercial (seg-sex, sem fins de semana)',
+        impact: 'Atenção: a limitação ao horário comercial pode comprometer o atendimento de emergências e gerar acúmulo de processamento, impactando prazos e qualidade.'
+      },
+      {
+        value: 1,
+        label: '7 dias por semana, 24 horas (sem folga regulamentar adequada)',
+        impact: 'Risco crítico: escala contínua sem descanso adequado gera fadiga, aumenta erros, reduz qualidade e pode gerar passivos trabalhistas. Avaliar NR-01 e gestão de riscos psicossociais.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental conhecer o regime de funcionamento para avaliar capacidade operativa e conformidade trabalhista.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== NOVAS PERGUNTAS - GESTÃO (FUNCIONÁRIOS ADAPTADOS) ====================
+  {
+    id: 'gestao_12',
+    category: 'gestao',
+    question: 'A CME possui funcionários com adaptação de função (reabilitados, PCD ou readaptados)?',
+    description: 'A gestão de funcionários adaptados requer atenção especial às condições de trabalho, adequação de tarefas e conformidade com legislação trabalhista e de segurança.',
+    options: [
+      {
+        value: 4,
+        label: 'Sim, e possuem acompanhamento adequado com adequação de função e suporte',
+        impact: 'Excelente: a inclusão com suporte adequado demonstra maturidade na gestão de pessoas e conformidade com legislação. Funcionários bem apoiados são produtivos e engajados.'
+      },
+      {
+        value: 3,
+        label: 'Sim, mas sem acompanhamento ou adequação formalizada',
+        impact: 'Atenção: a presença de funcionários adaptados sem suporte formal pode gerar riscos trabalhistas e de segurança. Recomenda-se formalizar o PGR e adequações necessárias.'
+      },
+      {
+        value: 2,
+        label: 'Sim, mas enfrentamos dificuldades na gestão dessas adaptações',
+        impact: 'Risco moderado: dificuldades na gestão de adaptações podem impactar a operação e a saúde do trabalhador. Recomenda-se buscar assessoria especializada em ergonomia e medicina ocupacional.'
+      },
+      {
+        value: 1,
+        label: 'Não possuímos, mas não há mapeamento ou avaliação sobre isso',
+        impact: 'Risco: a ausência de mapeamento pode esconder necessidades não atendidas e passivos trabalhistas. Recomenda-se realizar levantamento junto ao SESMT ou responsável.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: mapear a situação de funcionários adaptados é essencial para conformidade com CLT, Lei de Cotas e NR-01.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== NOVAS PERGUNTAS - GESTÃO (RISCOS PSICOSSOCIAIS NR-01) ====================
+  {
+    id: 'gestao_13',
+    category: 'gestao',
+    question: 'O setor da CME já realizou o levantamento dos riscos psicossociais conforme a NR-01?',
+    description: 'A NR-01 (Gerenciamento de Riscos Ocupacionais) exige a avaliação de riscos psicossociais como estresse, assédio, carga mental excessiva e fatores que impactam a saúde mental dos trabalhadores.',
+    options: [
+      {
+        value: 4,
+        label: 'Sim, o levantamento foi realizado e ações preventivas foram implementadas',
+        impact: 'Excelente: a conformidade com a NR-01 demonstra compromisso com a saúde mental da equipe, reduz riscos trabalhistas e melhora o ambiente e a produtividade.'
+      },
+      {
+        value: 3,
+        label: 'Sim, o levantamento foi realizado, mas as ações ainda estão em planejamento',
+        impact: 'Bom: o diagnóstico foi feito, o que já coloca o setor à frente. É fundamental avançar rapidamente para a fase de implementação das ações preventivas.'
+      },
+      {
+        value: 2,
+        label: 'Parcialmente, há algum tipo de avaliação mas não contempla todos os requisitos da NR-01',
+        impact: 'Atenção: avaliação parcial pode deixar lacunas que expõem a instituição a riscos trabalhistas. Recomenda-se adequar ao formato completo da NR-01 o mais breve possível.'
+      },
+      {
+        value: 1,
+        label: 'Não, o setor ainda não realizou nenhum levantamento de riscos psicossociais',
+        impact: 'Risco crítico: a ausência de levantamento de riscos psicossociais configura não conformidade com a NR-01, expõe a instituição a autuações e passivos trabalhistas, e compromete a saúde da equipe.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: o levantamento de riscos psicossociais é obrigatório pela NR-01. É fundamental verificar se a instituição está em conformidade.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== LIMPEZA CONCORRENTE E TERMINAL ====================
+  {
+    id: 'processo_22',
+    category: 'processo',
+    question: 'Como são realizadas as limpezas concorrente e terminal nas áreas da CME?',
+    description: 'A limpeza concorrente (durante o turno) e terminal (final do turno) são fundamentais para controle de infecção e manutenção da qualidade ambiental.',
+    options: [
+      {
+        value: 4,
+        label: 'Diária, semanal e mensal bem definidas, além de sempre que necessário (concorrente)',
+        impact: 'Excelente: cronograma completo com limpezas diárias, semanais, mensais e concorrentes demonstra protocolo robusto de controle de infecção e biossegurança.'
+      },
+      {
+        value: 3,
+        label: 'Realizamos limpeza diária e terminal, mas sem periodicidade semanal/mensal formalizada',
+        impact: 'Bom: as limpezas essenciais são realizadas. Recomenda-se formalizar cronograma semanal e mensal para áreas específicas como descontaminação e esterilização.'
+      },
+      {
+        value: 2,
+        label: 'Realizamos apenas a limpeza terminal diária, sem concorrente regular',
+        impact: 'Atenção: a ausência de limpeza concorrente pode comprometer o controle ambiental durante o expediente, especialmente em áreas de alto tráfego como expurgo.'
+      },
+      {
+        value: 1,
+        label: 'Não há cronograma definido / limpeza informal',
+        impact: 'Risco crítico: a ausência de cronograma de limpeza compromete o controle de infecção, a biossegurança e pode gerar não conformidades em auditorias e fiscalizações.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é essencial mapear e padronizar o cronograma de limpeza concorrente e terminal conforme RDC 15/2012.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== SEGURANÇA AMBIENTAL - ÁLCOOL GEL ====================
+  {
+    id: 'processo_23',
+    category: 'processo',
+    question: 'Como está a disponibilidade de preparações alcoólicas (álcool gel) nos ambientes da CME?',
+    description: 'A disponibilidade de álcool gel em todos os pontos de assistência é obrigatória conforme a RDC Anvisa e fundamental para higienização das mãos.',
+    options: [
+      {
+        value: 4,
+        label: 'Disponível em todos os ambientes com dispensers eletrônicos acionados por sensores',
+        impact: 'Excelente: cobertura total com tecnologia touchless reduz contaminação cruzada, demonstra investimento em infraestrutura e conformidade com normas de higienização.'
+      },
+      {
+        value: 3,
+        label: 'Disponível em todos os ambientes, porém com dispensers manuais ou frascos',
+        impact: 'Bom: cobertura completa, mas dispensers manuais exigem contato manual o que pode comprometer a eficácia da antissepsia. Recomenda-se migrar para acionamento por sensor.'
+      },
+      {
+        value: 2,
+        label: 'Disponível apenas em alguns ambientes (parcial)',
+        impact: 'Atenção: a disponibilidade parcial compromete a adesão à higienização das mãos nos pontos sem cobertura, aumentando risco de contaminação cruzada.'
+      },
+      {
+        value: 1,
+        label: 'Não há disponibilidade padronizada de álcool gel na CME',
+        impact: 'Risco crítico: a ausência de álcool gel configura não conformidade grave com normas de biossegurança e controle de infecção, expondo pacientes e profissionais a riscos.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é obrigatório mapear e garantir disponibilidade de preparações alcoólicas em todos os pontos de assistência da CME.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== CAIXAS DE PERFUROCORTANTES ====================
+  {
+    id: 'processo_24',
+    category: 'processo',
+    question: 'Como está a disponibilidade de caixas de perfurocortantes na CME e quais áreas são contempladas?',
+    description: 'As caixas de perfurocortantes são obrigatórias em todos os ambientes onde há geração de resíduos perfurocortantes, conforme RDC 222/2018.',
+    options: [
+      {
+        value: 4,
+        label: 'Disponíveis em todas as áreas com caixas de material rígido, em altura e local adequados',
+        impact: 'Excelente: cobertura completa com material adequado (rígido) e posicionamento correto (altura entre 80cm e 120cm) demonstra conformidade plena com a RDC 222/2018.'
+      },
+      {
+        value: 3,
+        label: 'Disponíveis na maioria das áreas, mas algumas ainda não possuem',
+        impact: 'Bom: a maioria das áreas está coberta. Recomenda-se mapear os pontos ausentes e implantar imediatamente para garantir cobertura total.'
+      },
+      {
+        value: 2,
+        label: 'Utilizamos caixas de papelão ou material não rígido',
+        impact: 'Atenção: caixas de papelão não oferecem resistência adequada e podem gerar perfurações acidentais. A RDC 222/2018 exige recipientes rígidos resistentes à punctura.'
+      },
+      {
+        value: 1,
+        label: 'Não há disponibilidade padronizada de caixas de perfurocortantes',
+        impact: 'Risco crítico: a ausência de recipientes adequados para perfurocortantes expõe todos os profissionais a riscos de acidentes percutâneos e possível contaminação por patógenos sanguíneos.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é obrigatório garantir recipientes rígidos para perfurocortantes em todos os pontos de geração conforme RDC 222/2018.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== EQUIPE DE LIMPEZA ====================
+  {
+    id: 'processo_25',
+    category: 'processo',
+    question: 'A equipe de limpeza da CME é dedicada exclusivamente ao setor ou compartilhada com outras áreas?',
+    description: 'Uma equipe de limpeza dedicada à CME é fundamental para garantir a qualidade e especificidade dos processos de descontaminação ambiental.',
+    options: [
+      {
+        value: 4,
+        label: 'Equipe dedicada exclusivamente à CME com treinamento específico',
+        impact: 'Excelente: equipe dedicada com treinamento específico garante qualidade na limpeza, conhecimento das particularidades da CME e redução de riscos de contaminação cruzada.'
+      },
+      {
+        value: 3,
+        label: 'Equipe dedicada, mas sem treinamento específico formal para CME',
+        impact: 'Bom: a dedicação ao setor é positiva, mas a falta de treinamento específico pode comprometer a qualidade. Recomenda-se capacitação em limpeza hospitalar e CME.'
+      },
+      {
+        value: 2,
+        label: 'Equipe compartilhada com outras áreas, mas com escala definida para CME',
+        impact: 'Atenção: a compartilhação pode gerar contaminação cruzada entre áreas e comprometer a especificidade da limpeza. Recomenda-se avaliar viabilidade de equipe exclusiva.'
+      },
+      {
+        value: 1,
+        label: 'Equipe compartilhada sem definição de escala ou responsabilidade clara',
+        impact: 'Risco crítico: a ausência de responsabilidade definida compromete a qualidade da limpeza, a biossegurança e pode gerar não conformidades graves em fiscalizações.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear a estrutura da equipe de limpeza e garantir dedicatória ao setor para qualidade e biossegurança.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== QUANTITATIVO DE OPME ====================
+  {
+    id: 'tecnologia_15',
+    category: 'tecnologia',
+    question: 'Qual é o quantitativo mensal de OPME (Órteses, Próteses e Materiais Especiais) processados pela CME?',
+    description: 'O volume de OPME impacta diretamente na complexidade operacional, necessidade de rastreabilidade, controle de inventário e exigência de processos específicos.',
+    options: [
+      {
+        value: 4,
+        label: 'Mais de 100 OPMEs/mês, com sistema de rastreabilidade implantado',
+        impact: 'Alto volume com rastreabilidade demonstra maturidade operacional e controle. Recomenda-se manter indicadores de qualidade e tempo de processamento monitorados.'
+      },
+      {
+        value: 3,
+        label: 'De 30 a 100 OPMEs/mês, com controle organizado',
+        impact: 'Volume moderado-alto que demanda organização. Recomenda-se avaliar sistema informatizado de rastreabilidade e controle de validade se ainda não existir.'
+      },
+      {
+        value: 2,
+        label: 'Até 30 OPMEs/mês, com controle básico',
+        impact: 'Volume menor, mas que ainda exige controle adequado. Recomenda-se formalizar processos de recebimento, conferência, esterilização e rastreabilidade para crescer com qualidade.'
+      },
+      {
+        value: 1,
+        label: 'Não processamos OPME / ou não há controle formal',
+        impact: 'Atenção: a ausência de controle de OPME pode gerar perdas, riscos ao paciente e passivos. Mesmo que o volume seja baixo, todo OPME precisa de rastreabilidade completa.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear o volume de OPME para dimensionar a equipe, os processos e os sistemas de rastreabilidade.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== ESPAÇO FÍSICO E PLANEJAMENTO ====================
+  {
+    id: 'gestao_14',
+    category: 'gestao',
+    question: 'Qual é a situação atual do espaço físico da CME em relação ao planejamento e reformas?',
+    description: 'O espaço físico adequado é fundamental para o fluxo correto dos processos, conformidade com normas e capacidade operacional da CME.',
+    options: [
+      {
+        value: 4,
+        label: 'Espaço adequado com planejamento de crescimento formalizado',
+        impact: 'Excelente: espaço adequado com planejamento demonstra visão estratégica, prevents瓶颈 operacionais e garante capacidade para expansão futura organizada.'
+      },
+      {
+        value: 3,
+        label: 'Espaço adequado, mas sem planejamento formal de crescimento',
+        impact: 'Bom: o espaço atende às demandas atuais, mas a falta de planejamento pode gerar problemas futuros com o aumento da demanda cirúrgica. Recomenda-se elaborar planejamento.'
+      },
+      {
+        value: 2,
+        label: 'Espaço em reforma ou com reformas planejadas',
+        impact: 'Atenção: reformas são oportunidades de adequação, mas durante o período podem impactar fluxos e produtividade. É fundamental manter processos alternativos e cronograma claro.'
+      },
+      {
+        value: 1,
+        label: 'Espaço precário, sem planejamento de reforma ou adequação',
+        impact: 'Risco crítico: espaço inadequado compromete fluxos, qualidade, biossegurança e pode gerar não conformidades com a RDC 15/2012. Reforma estrutural pode ser necessária com urgência.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental avaliar o espaço físico da CME para garantir conformidade com normas e capacidade operacional adequada.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== PROXIMIDADE AO CENTRO CIRÚRGICO ====================
+  {
+    id: 'gestao_15',
+    category: 'gestao',
+    question: 'A CME está localizada próxima ao centro cirúrgico ou em área distante de apoio?',
+    description: 'A proximidade da CME ao centro cirúrgico é determinante para agilidade no fluxo de materiais, tempo de turno cirúrgico e capacidade de resposta a emergências.',
+    options: [
+      {
+        value: 4,
+        label: 'Integrada ao centro cirúrgico (mesmo andar ou anexa)',
+        impact: 'Excelente: a integração ao centro cirúrgico otimiza fluxos, reduz tempo de transporte, minimiza riscos de contaminação e viabiliza resposta rápida a demandas emergenciais.'
+      },
+      {
+        value: 3,
+        label: 'Próxima, mas não integrada (andar adjacente ou bloco próximo)',
+        impact: 'Bom: a proximidade facilita o fluxo, mas a não integração pode gerar gargalos de transporte. Recomenda-se avaliar fluxos logísticos e tempos de deslocamento.'
+      },
+      {
+        value: 2,
+        label: 'Em área intermediária (mesmo prédio, mas com distância significativa)',
+        impact: 'Atenção: a distância pode comprometer tempos de resposta, aumentar riscos de contaminação durante transporte e gerar insatisfação entre equipes cirúrgicas.'
+      },
+      {
+        value: 1,
+        label: 'Em área distante (prédio separado ou andar remoto)',
+        impact: 'Risco crítico: a distância excessiva compromete agilidade, segurança, aumenta custos de transporte e riscos de contaminação. Pode ser necessário planejar realocação.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: a localização da CME em relação ao centro cirúrgico impacta diretamente na operação e deve ser avaliada.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== EPIs POR ÁREA DA CME ====================
+  {
+    id: 'processo_26',
+    category: 'processo',
+    question: 'Quais EPIs (Equipamentos de Proteção Individual) são disponibilizados e utilizados em cada área da CME?',
+    description: 'O uso correto de EPIs específicos por área é obrigatório conforme NR-32 e fundamental para a segurança dos profissionais. Avental impermeável, luvas de cano longo, PFF2, óculos e face shield são essenciais na área suja; vestimenta privativa, touca, máscara e luvas de procedimento na área limpa; luvas térmicas na carga/descarga de autoclaves.',
+    options: [
+      {
+        value: 4,
+        label: 'EPIs completos e diferenciados por área (expurgo, preparo, esterilização, carga/descarga), com protetor auricular',
+        impact: 'Excelente: a disponibilização de EPIs completos e específicos para cada área demonstra conformidade plena com a NR-32, protege os profissionais contra riscos biológicos, físicos e químicos, e reduz passivos trabalhistas.'
+      },
+      {
+        value: 3,
+        label: 'EPIs diferenciados por área, mas faltam itens complementares (ex: protetor auricular ou face shield)',
+        impact: 'Bom: a diferenciação por área é fundamental e está presente. Recomenda-se completar com itens faltantes como protetor auricular (se ruído acima de 85dB) e face shield para procedimentos com risco de respingos.'
+      },
+      {
+        value: 2,
+        label: 'EPIs padronizados sem diferenciação clara por área (mesmos EPIs em todas as áreas)',
+        impact: 'Atenção: o uso de EPIs padronizados sem diferenciação pode expor profissionais a riscos específicos de cada área. A área de expurgo exige proteção máxima (impermeáveis, cano longo) que não é necessária no preparo.'
+      },
+      {
+        value: 1,
+        label: 'Disponibilidade parcial ou irregular de EPIs / falta de EPIs essenciais',
+        impact: 'Risco crítico: a falta de EPIs essenciais configura não conformidade grave com a NR-32, expõe profissionais a riscos biológicos, químicos e físicos, e pode gerar autuações, afastamentos e processos trabalhistas.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é obrigatório mapear os EPIs por área da CME conforme NR-32 e garantir disponibilização adequada para todos os profissionais.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== TERCEIRIZAÇÃO - PROCESSAMENTO EXTERNO ====================
+  {
+    id: 'processo_27',
+    category: 'processo',
+    question: 'A instituição utiliza algum serviço de processamento e esterilização externo (terceirizado) e para quais tipos de materiais?',
+    description: 'A terceirização do processamento é uma prática comum para materiais que não podem ser esterilizados internamente, como instrumentais complexos, equipamentos de videocirurgia ou materiais que exigem tecnologia específica como óxido de etileno ou plasma de peróxido de hidrogênio.',
+    options: [
+      {
+        value: 4,
+        label: 'Sim, para materiais específicos com contrato formal, rastreabilidade e validação do processo externo',
+        impact: 'Excelente: a terceirização com contrato formal, rastreabilidade e validação demonstra conformidade com a RDC 15/2012 e garante a segurança dos materiais processados externamente.'
+      },
+      {
+        value: 3,
+        label: 'Sim, utilizamos serviço externo para alguns materiais, mas sem rastreabilidade completa',
+        impact: 'Atenção: o uso de serviço externo é adequado para materiais específicos, mas a falta de rastreabilidade pode comprometer a segurança. Recomenda-se exigir laudos e documentação completa do processo.'
+      },
+      {
+        value: 2,
+        label: 'Sim, mas sem contrato formal ou critérios claros de seleção do prestador',
+        impact: 'Risco moderado: a ausência de formalização pode gerar responsabilidade compartilhada em caso de falhas. Recomenda-se formalizar contrato com exigências de validação e rastreabilidade.'
+      },
+      {
+        value: 1,
+        label: 'Não utilizamos, porém existem materiais que poderiam se beneficiar do processamento externo',
+        impact: 'Atenção: alguns materiais como instrumentais de videocirurgia, equipamentos delicados ou materiais termossensíveis podem necessitar de processamento com tecnologia não disponível internamente. Recomenda-se avaliar.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear se há necessidade de processamento externo e garantir que, quando utilizado, o prestador atenda todos os requisitos regulatórios.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== ESCOLARIDADE / FORMALIZAÇÃO DA EQUIPE ====================
+  {
+    id: 'gestao_16',
+    category: 'gestao',
+    question: 'Qual é o nível de escolaridade e formalização da equipe que atua na CME?',
+    description: 'A escolaridade e a capacitação formal da equipe impactam diretamente na qualidade dos processos, na interpretação de protocolos, na capacidade de resolução de problemas e na conformidade com as normas vigentes.',
+    options: [
+      {
+        value: 4,
+        label: 'Equipe com ensino técnico ou superior em saúde, com especializações e capacitações em CME',
+        impact: 'Excelente: equipe qualificada com formação técnica ou superior demonstra investimento em capital humano, maior capacidade de compreensão dos processos e autonomia para tomadas de decisão seguras.'
+      },
+      {
+        value: 3,
+        label: 'Equipe com ensino médio completo e capacitações específicas em CME realizadas periodicamente',
+        impact: 'Bom: a combinação de escolaridade com capacitações específicas em CME é positiva. Recomenda-se incentivar a busca por formação técnica e promover educação continuada.'
+      },
+      {
+        value: 2,
+        label: 'Equipe com ensino médio, mas sem capacitações formais ou periódicas em CME',
+        impact: 'Atenção: a falta de capacitações específicas pode comprometer a execução correta dos processos, a interpretação de protocolos e a resposta a situações não rotineiras. Recomenda-se treinar.'
+      },
+      {
+        value: 1,
+        label: 'Equipe sem formação mínima adequada ou sem acesso a capacitações',
+        impact: 'Risco crítico: a falta de formação e capacitação compromete a qualidade de todos os processos da CME, gera riscos à segurança do paciente e pode configurar não conformidade em fiscalizações.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear o nível de escolaridade e capacitação da equipe para planejar ações de qualificação e garantir conformidade.'
+      },
+    ],
+    weight: 1,
+  },
+
+  // ==================== SECADORA / ARMÁRIO DE SECAGEM ====================
+  {
+    id: 'tecnologia_16',
+    category: 'tecnologia',
+    question: 'A CME possui secadora ou armário de secagem para os instrumentais? Quantas unidades?',
+    description: 'A secagem adequada dos instrumentais antes da embalagem é fundamental para evitar umidade residual, que pode comprometer o processo de esterilização e causar corrosão nos materiais. A secadora ou armário de secagem com ar filtrado é o método recomendado.',
+    options: [
+      {
+        value: 4,
+        label: 'Possui secadora/armário de secagem em quantidade suficiente para a demanda',
+        impact: 'Excelente: secagem adequada e dimensionada garante que os instrumentais estejam completamente secos antes da embalagem, evitando umidade residual que compromete a esterilização e causa corrosão.'
+      },
+      {
+        value: 3,
+        label: 'Possui secadora, mas a quantidade é insuficiente para o volume atual',
+        impact: 'Bom: o equipamento existe, porém a insuficiência pode gerar gargalos e levar à secagem inadequada por pressa de tempo. Recomenda-se avaliar ampliação conforme volume de processamento.'
+      },
+      {
+        value: 2,
+        label: 'Não possui secadora, utiliza outro método (ex: ar comprimido, estufa ou secagem natural)',
+        impact: 'Atenção: métodos alternativos podem não garantir secagem completa. A secagem natural demora e gera gargalos; ar comprimido sem filtro pode contaminar. Recomenda-se adquirir secadora com ar filtrado.'
+      },
+      {
+        value: 1,
+        label: 'Não possui equipamento de secagem / realiza secagem de forma improvisada',
+        impact: 'Risco crítico: a ausência de secagem adequada pode comprometer a esterilização, gerar umidade residual nos pacotes, causar corrosão nos instrumentais e aumentar custos com reposição.'
+      },
+      {
+        value: 0,
+        label: 'Não possuo esta informação',
+        impact: 'FALTA DE VISIBILIDADE: é fundamental mapear os equipamentos de secagem para garantir a qualidade do processo e dimensionar necessidades de investimento.'
+      },
+    ],
+    weight: 1,
+  },
 ];
 
 // Função para calcular o resultado do checkup

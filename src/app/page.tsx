@@ -1303,12 +1303,10 @@ Não substitui auditorias regulatórias oficiais.
   );
 }
 
-// ============================
-// Main App
-// ============================
 export default function Home() {
   const [screen, setScreen] = useState<ScreenType>('intro');
   const [registrationData, setRegistrationData] = useState<RegistrationData>({ name: '', position: '', phone: '', email: '', establishmentType: '', bedCount: '', cmeProfessionals: '', region: '', state: '' });
+  const [assessmentId, setAssessmentId] = useState<string | null>(null);
   const [consent1, setConsent1] = useState(false);
   const [consent2, setConsent2] = useState(false);
   const [responses, setResponses] = useState<Map<string, number>>(new Map());
@@ -1379,7 +1377,24 @@ export default function Home() {
     setScreen('register2');
   };
 
-  const handleAssessmentStart = () => {
+  const handleAssessmentStart = async () => {
+    // Save registration data before starting questions
+    try {
+      const res = await fetch('/api/assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          registrationData,
+          responses: {},
+          result: { totalScore: 0, totalPercentage: 0, classification: 'Pendente', categoryScores: [], responses: [], visibilityGaps: [] },
+          partial: true, // flag para cadastro parcial sem respostas
+        }),
+      });
+      const data = await res.json();
+      if (data.id) setAssessmentId(data.id);
+    } catch (err) {
+      console.error('Error saving registration:', err);
+    }
     setScreen('assessment');
   };
 
@@ -1407,15 +1422,30 @@ export default function Home() {
         visibilityGaps: result?.visibilityGaps ?? [],
       };
 
-      await fetch('/api/assessment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          registrationData,
-          responses: responsesObj,
-          result: currentResult,
-        }),
-      });
+      if (assessmentId) {
+        // Update existing assessment with responses and result
+        await fetch(`/api/assessment/${assessmentId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            responses: JSON.stringify(responsesObj),
+            resultJson: JSON.stringify(currentResult),
+            totalScore: currentResult.totalPercentage ?? 0,
+            status: 'pending',
+          }),
+        });
+      } else {
+        // Fallback: create new assessment
+        await fetch('/api/assessment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            registrationData,
+            responses: responsesObj,
+            result: currentResult,
+          }),
+        });
+      }
     } catch (err) {
       console.error('Error saving assessment:', err);
     }
@@ -1429,6 +1459,7 @@ export default function Home() {
     setConsent2(false);
     setResponses(new Map());
     setResult(null);
+    setAssessmentId(null);
   };
 
   switch (screen) {

@@ -386,18 +386,9 @@ Não substitui auditorias regulatórias oficiais.
 
         {/* ===== PERSONALIZED INTRO MESSAGE ===== */}
         <Card className="border-0 shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src="/logo-cme-inteligente.png" alt="CME Inteligente" className="h-10 sm:h-12 object-contain brightness-0 invert" />
-              <span className="text-white/80 text-sm font-medium hidden sm:block">Check-up CME Inteligente</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="text-right hidden sm:block">
-                <p className="text-white text-sm font-semibold">Klever Oliveira Lopes</p>
-                <p className="text-white/70 text-xs">Especialista em CME</p>
-              </div>
-              <img src="/klever-lopes-2.jpg" alt="Klever Oliveira Lopes" className="w-12 h-12 rounded-full border-2 border-white/30 object-cover shadow-md" />
-            </div>
+          <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 px-6 py-4 flex items-center gap-3">
+            <img src="/logo-cme-inteligente.png" alt="CME Inteligente" className="h-10 sm:h-12 object-contain" />
+            <span className="text-white text-sm sm:text-base font-semibold">Check-up CME Inteligente</span>
           </div>
           <CardContent className="pt-6 pb-6">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
