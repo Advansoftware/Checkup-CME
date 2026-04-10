@@ -385,6 +385,47 @@ function DetailView({ assessment, onBack }: {
   const [releaseLoading, setReleaseLoading] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  // Toggle states for sections to show/hide in user result
+  const defaultSections = {
+    categoryClassification: true,
+    strongWeakPoints: true,
+    statistics: true,
+    financialAnalysis: true,
+    top5Worst: true,
+    adminObservation: true,
+    adjustedFinancials: true,
+    recommendations: true,
+    visibilityGaps: true,
+  };
+
+  const savedSections = useMemo(() => {
+    try {
+      if (assessment.resultJson) {
+        const parsed = JSON.parse(assessment.resultJson);
+        if (parsed.visibleSections) return { ...defaultSections, ...parsed.visibleSections };
+      }
+    } catch {}
+    return defaultSections;
+  }, [assessment.resultJson]);
+
+  const [visibleSections, setVisibleSections] = useState(savedSections);
+
+  const toggleSection = (key: keyof typeof defaultSections) => {
+    setVisibleSections(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const sectionLabels: Record<keyof typeof defaultSections, { label: string; icon: React.ReactNode; desc: string }> = {
+    categoryClassification: { label: 'Classificação por Categoria', icon: <BarChart3 className="w-4 h-4" />, desc: 'Badge individual (Avançado/Moderado/Atenção/Crítico) por categoria' },
+    strongWeakPoints: { label: 'Ponto Forte & Ponto Crítico', icon: <TrendingUp className="w-4 h-4" />, desc: 'Categoria com melhor e pior desempenho' },
+    statistics: { label: 'Estatísticas da Avaliação', icon: <Activity className="w-4 h-4" />, desc: 'Respondidas, sem informação, total, completude' },
+    financialAnalysis: { label: 'Análise Financeira', icon: <DollarSign className="w-4 h-4" />, desc: 'Estimativa de desperdício e custos por item' },
+    top5Worst: { label: 'Top 5 Pontos Críticos', icon: <ArrowDownRight className="w-4 h-4" />, desc: 'Piores perguntas com impacto e categoria' },
+    adminObservation: { label: 'Observação do Especialista', icon: <HeartPulse className="w-4 h-4" />, desc: 'Texto personalizado escrito por você' },
+    adjustedFinancials: { label: 'Dados Financeiros Ajustados', icon: <FileWarning className="w-4 h-4" />, desc: 'Economia, risco e prejuízo editados por você' },
+    recommendations: { label: 'Recomendações Prioritárias', icon: <Target className="w-4 h-4" />, desc: 'Sugestões para as 2 categorias mais fracas' },
+    visibilityGaps: { label: 'Lacunas de Visibilidade', icon: <AlertTriangle className="w-4 h-4" />, desc: 'Perguntas "Não possuo esta informação"' },
+  };
+
   // Parse responses
   const responses: Record<string, number> = {};
   try {
@@ -570,6 +611,7 @@ function DetailView({ assessment, onBack }: {
           economyMaxEdited: economyMax ? parseFloat(economyMax) : null,
           financialRiskLevelEdited: riskLevel || null,
           financialLossEdited: estimatedLoss || null,
+          visibleSections,
         }),
       });
       setSaved(true);
@@ -593,6 +635,7 @@ function DetailView({ assessment, onBack }: {
           financialRiskLevelEdited: riskLevel || null,
           financialLossEdited: estimatedLoss || null,
           status: 'released',
+          visibleSections,
         }),
       });
       onBack(); // Refresh
@@ -1127,6 +1170,63 @@ function DetailView({ assessment, onBack }: {
                 <Button onClick={handleSave} variant="outline" className="w-full" disabled={saving}>
                   {saved ? <><Check className="w-4 h-4 mr-1" /> Salvo!</> : 'Salvar alterações'}
                 </Button>
+              </CardContent>
+            </Card>
+
+            {/* ===== SEÇÃO: O QUE LIBERAR PARA O CLIENTE ===== */}
+            <Card className="border-indigo-200 bg-indigo-50/30">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2 text-indigo-800">
+                  <Shield className="w-5 h-5" />
+                  O que liberar para o cliente
+                </CardTitle>
+                <CardDescription>
+                  Ative ou desative cada seção. Somente as marcadas serão visíveis no resultado.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {Object.entries(sectionLabels).map(([key, info]) => {
+                  const k = key as keyof typeof defaultSections;
+                  const isOn = visibleSections[k];
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => toggleSection(k)}
+                      className={`w-full flex items-center gap-3 p-3 rounded-xl border text-left transition-all ${
+                        isOn ? 'bg-white border-indigo-200 shadow-sm' : 'bg-gray-50 border-gray-200 opacity-60'
+                      }`}
+                    >
+                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${isOn ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-200 text-gray-400'}`}>
+                        {info.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className={`text-sm font-semibold ${isOn ? 'text-gray-900' : 'text-gray-500'}`}>{info.label}</p>
+                        <p className="text-xs text-muted-foreground">{info.desc}</p>
+                      </div>
+                      <div className={`w-10 h-6 rounded-full transition-colors shrink-0 relative ${isOn ? 'bg-indigo-500' : 'bg-gray-300'}`}>
+                        <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-all ${isOn ? 'left-5' : 'left-1'}`} />
+                      </div>
+                    </button>
+                  );
+                })}
+                <div className="flex gap-2 pt-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
+                    onClick={() => setVisibleSections(Object.keys(defaultSections).reduce((acc, k) => ({ ...acc, [k]: true }), {} as typeof defaultSections))}
+                  >
+                    Ativar Todas
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
+                    onClick={() => setVisibleSections(Object.keys(defaultSections).reduce((acc, k) => ({ ...acc, [k]: false }), {} as typeof defaultSections))}
+                  >
+                    Desativar Todas
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 

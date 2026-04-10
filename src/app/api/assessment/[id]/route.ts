@@ -54,6 +54,7 @@ export async function PUT(request: NextRequest) {
       financialRiskLevelEdited,
       financialLossEdited,
       status,
+      visibleSections,
     } = body;
 
     const assessment = await db.assessment.findUnique({ where: { id } });
@@ -70,6 +71,10 @@ export async function PUT(request: NextRequest) {
     if (economyMaxEdited !== undefined) updateData.economyMaxEdited = economyMaxEdited;
     if (financialRiskLevelEdited !== undefined) updateData.financialRiskLevelEdited = financialRiskLevelEdited;
     if (financialLossEdited !== undefined) updateData.financialLossEdited = financialLossEdited;
+
+    if (visibleSections !== undefined) {
+      updateData.resultJson = JSON.stringify({ visibleSections });
+    }
 
     if (status === 'released') {
       updateData.status = 'released';
