@@ -396,32 +396,45 @@ Não substitui auditorias regulatórias oficiais.
                 <p className="text-white text-sm font-semibold">Klever Oliveira Lopes</p>
                 <p className="text-white/70 text-xs">Especialista em CME</p>
               </div>
-              <img src="/klever-lopes.jpg" alt="Klever Oliveira Lopes" className="w-12 h-12 rounded-full border-2 border-white/30 object-cover shadow-md" />
+              <img src="/klever-lopes.png" alt="Klever Oliveira Lopes" className="w-12 h-12 rounded-full border-2 border-white/30 object-cover shadow-md" />
             </div>
           </div>
           <CardContent className="pt-6 pb-6">
-            <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p className="text-base font-medium text-gray-900">
-                Foi muito importante ter você comigo nesta jornada do Check-up CME INTELIGENTE.
-              </p>
-              <p className="text-sm">
-                Espero que essa experiência tenha ajudado você a olhar para a sua CME com mais clareza, mais atenção e mais senso estratégico. A partir das respostas que você compartilhou, foi possível identificar percepções relevantes sobre a sua operação e sinalizar pontos que merecem atenção, fortalecimento e evolução.
-              </p>
-              <p className="text-sm">
-                Esta devolutiva representa uma leitura inicial do seu cenário, construída com base nas informações apresentadas ao longo do check-up. Ela não substitui uma análise técnica aprofundada, mas oferece um ponto de partida importante para apoiar suas reflexões, decisões e próximos passos.
-              </p>
-              <p className="text-sm">
-                Muitas vezes, identificar oportunidades de melhoria já é um grande avanço. Mas transformar essa percepção em um plano de ação mais consistente, em um diagnóstico mais robusto ou em uma proposta estruturada para apresentação à diretoria exige aprofundamento técnico e direcionamento estratégico.
-              </p>
-              <p className="text-sm">
-                Se você quiser avançar nessa próxima etapa, agende uma conversa comigo.
-                <br />
-                <span className="font-semibold text-teal-700">Terei prazer em ajudar você a aprofundar essa análise, esclarecer os pontos identificados no check-up e construir uma visão ainda mais completa da sua CME.</span>
-              </p>
-              <div className="pt-3 border-t">
-                <p className="text-sm text-muted-foreground text-center font-medium">
-                  Logo abaixo, você poderá visualizar o seu relatório.
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              {/* Foto grande do Klever */}
+              <div className="shrink-0 flex flex-col items-center gap-2">
+                <img
+                  src="/klever-lopes.png"
+                  alt="Klever Oliveira Lopes"
+                  className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-teal-100 object-cover shadow-lg"
+                />
+                <p className="text-xs font-semibold text-teal-700 text-center">Klever Oliveira Lopes</p>
+                <p className="text-[10px] text-muted-foreground text-center">Especialista em CME</p>
+              </div>
+              {/* Texto da mensagem */}
+              <div className="flex-1 space-y-4 text-gray-700 leading-relaxed">
+                <p className="text-base font-medium text-gray-900">
+                  Foi muito importante ter você comigo nesta jornada do Check-up CME INTELIGENTE.
                 </p>
+                <p className="text-sm">
+                  Espero que essa experiência tenha ajudado você a olhar para a sua CME com mais clareza, mais atenção e mais senso estratégico. A partir das respostas que você compartilhou, foi possível identificar percepções relevantes sobre a sua operação e sinalizar pontos que merecem atenção, fortalecimento e evolução.
+                </p>
+                <p className="text-sm">
+                  Esta devolutiva representa uma leitura inicial do seu cenário, construída com base nas informações apresentadas ao longo do check-up. Ela não substitui uma análise técnica aprofundada, mas oferece um ponto de partida importante para apoiar suas reflexões, decisões e próximos passos.
+                </p>
+                <p className="text-sm">
+                  Muitas vezes, identificar oportunidades de melhoria já é um grande avanço. Mas transformar essa percepção em um plano de ação mais consistente, em um diagnóstico mais robusto ou em uma proposta estruturada para apresentação à diretoria exige aprofundamento técnico e direcionamento estratégico.
+                </p>
+                <p className="text-sm">
+                  Se você quiser avançar nessa próxima etapa, agende uma conversa comigo.
+                  <br />
+                  <span className="font-semibold text-teal-700">Terei prazer em ajudar você a aprofundar essa análise, esclarecer os pontos identificados no check-up e construir uma visão ainda mais completa da sua CME.</span>
+                </p>
+                <div className="pt-3 border-t">
+                  <p className="text-sm text-muted-foreground text-center sm:text-left font-medium">
+                    Logo abaixo, você poderá visualizar o seu relatório.
+                  </p>
+                </div>
               </div>
             </div>
           </CardContent>
