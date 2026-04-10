@@ -636,7 +636,7 @@ function ConsentScreen({ consent1, consent2, onConsentChange, onStart, onBack }:
               </p>
               <Separator />
               <p>
-                <strong className="text-foreground">Finalidade:</strong> Os dados coletados serão utilizados exclusivamente para a geração do laudo de avaliação do CME, identificação de oportunidades de melhoria e elaboração de recomendações personalizadas para o seu estabelecimento de saúde.
+                <strong className="text-foreground">Finalidade:</strong> Os dados coletados serão utilizados exclusivamente para a geração do diagnóstico de avaliação do CME, identificação de oportunidades de melhoria e elaboração de recomendações personalizadas para o seu estabelecimento de saúde.
               </p>
               <p>
                 <strong className="text-foreground">Base Legal:</strong> O tratamento dos dados é fundamentado no consentimento do titular (Art. 7º, I, Lei nº 13.709/2018 - LGPD) e no legítimo interesse do controlador para fins de melhoria contínua de serviços de saúde.
@@ -708,7 +708,7 @@ function ConsentScreen({ consent1, consent2, onConsentChange, onStart, onBack }:
                   <li>determinações previstas em RDCs e demais legislações brasileiras aplicáveis.</li>
                 </ul>
                 <p>
-                  Os resultados apresentados devem ser interpretados como instrumento de apoio à gestão, e não como laudo, parecer conclusivo ou validação formal de conformidade regulatória.
+                  Os resultados apresentados devem ser interpretados como instrumento de apoio à gestão, e não como diagnóstico, parecer conclusivo ou validação formal de conformidade regulatória.
                 </p>
               </div>
             </div>
