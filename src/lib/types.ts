@@ -23,7 +23,7 @@ export interface Question {
   weight: number;
 }
 
-export type ScreenType = 'intro' | 'register1' | 'register2' | 'consent' | 'assessment' | 'thankyou';
+export type ScreenType = 'intro' | 'register1' | 'register2' | 'consent' | 'assessment' | 'thankyou' | 'admin';
 
 export interface RegistrationData {
   name: string;

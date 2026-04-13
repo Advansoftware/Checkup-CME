@@ -34,6 +34,7 @@ import {
   getClassificationColor,
   getClassificationBg,
 } from '@/lib/types';
+import AdminPanel from '@/components/AdminPanel';
 
 // ============================
 // Circular Progress Component
@@ -1464,7 +1465,18 @@ export default function Home() {
 
   switch (screen) {
     case 'intro':
-      return <IntroScreen onStart={handleStart} />;
+      return (
+        <>
+          <IntroScreen onStart={handleStart} />
+          <button
+            onClick={() => setScreen('admin')}
+            className="fixed bottom-4 right-4 z-50 p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-500 hover:text-gray-700 transition-colors"
+            title="Painel Admin"
+          >
+            <Lock className="w-5 h-5" />
+          </button>
+        </>
+      );
     case 'register1':
       return (
         <RegisterScreen1
@@ -1503,6 +1515,8 @@ export default function Home() {
       );
     case 'thankyou':
       return <ThankYouScreen />;
+    case 'admin':
+      return <AdminPanel onBack={() => setScreen('intro')} />;
     default:
       return <IntroScreen onStart={handleStart} />;
   }
