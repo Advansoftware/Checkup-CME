@@ -186,8 +186,13 @@ function ResultsView({ data }: { data: AssessmentData }) {
   }, [data.resultJson]);
 
   // Parse responses
-  const responses: Record<string, number> = {};
-  try { Object.assign(responses, JSON.parse(data.responses)); } catch {}
+  const responses: Record<string, number> = useMemo(() => {
+    const res: Record<string, number> = {};
+    try {
+      Object.assign(res, JSON.parse(data.responses));
+    } catch {}
+    return res;
+  }, [data.responses]);
 
   // Category data
   const categoryScores = [
