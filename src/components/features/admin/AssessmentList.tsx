@@ -12,6 +12,16 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Search, Loader2, Eye, Download, Send, CheckCircle } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 interface Assessment {
   id: string
@@ -72,6 +82,8 @@ export default function AssessmentList() {
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedAssessment, setSelectedAssessment] = useState<Assessment | null>(null)
   const [detailLoading, setDetailLoading] = useState(false)
+  const [releasingAssessmentId, setReleasingAssessmentId] = useState<string | null>(null)
+  const [releaseLoading, setReleaseLoading] = useState(false)
 
   useEffect(() => {
     fetchAssessments()
@@ -103,6 +115,7 @@ export default function AssessmentList() {
   }, [statusFilter, token])
 
   const handleRelease = async (assessmentId: string) => {
+    setReleaseLoading(true)
     try {
       const res = await fetch(`/api/assessment/${assessmentId}`, {
         method: 'PUT',
@@ -114,10 +127,13 @@ export default function AssessmentList() {
       })
       
       if (res.ok) {
-        fetchAssessments()
+        await fetchAssessments()
+        setReleasingAssessmentId(null)
       }
     } catch (error) {
       console.error('Error releasing assessment:', error)
+    } finally {
+      setReleaseLoading(false)
     }
   }
 
@@ -241,7 +257,7 @@ export default function AssessmentList() {
                             variant="ghost" 
                             size="sm" 
                             title="Liberar resultado"
-                            onClick={() => handleRelease(a.id)}
+                            onClick={() => setReleasingAssessmentId(a.id)}
                           >
                             <CheckCircle className="w-4 h-4 text-green-600" />
                           </Button>
@@ -319,6 +335,39 @@ export default function AssessmentList() {
           ) : null}
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={!!releasingAssessmentId} onOpenChange={(open) => !open && setReleasingAssessmentId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Tem certeza que deseja liberar este resultado?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Ao liberar o resultado, o usuário correspondente poderá acessar o diagnóstico completo dele. Esta ação enviará a liberação técnica e não poderá ser desfeita.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={releaseLoading}>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault()
+                if (releasingAssessmentId) {
+                  await handleRelease(releasingAssessmentId)
+                }
+              }}
+              disabled={releaseLoading}
+              className="bg-teal-600 hover:bg-teal-700 text-white border-0"
+            >
+              {releaseLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Liberando...
+                </>
+              ) : (
+                'Sim, Liberar'
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }
