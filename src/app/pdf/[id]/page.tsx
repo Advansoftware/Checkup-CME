@@ -76,11 +76,13 @@ export default function PDFTemplatePage() {
   if (data.responses) data.responses.forEach((r: any) => { responsesMap[r.questionId] = r.answer })
 
   const totalQuestions = checkupQuestions.length
-  const totalAnswered = Object.keys(responsesMap).filter(k => responsesMap[k] > 0).length
-  const totalNoInfo = Object.keys(responsesMap).filter(k => responsesMap[k] === 0).length
-  const completeness = totalQuestions > 0 ? Math.round((totalAnswered / totalQuestions) * 100) : 0
+  const validQuestionIds = new Set(checkupQuestions.map(q => q.id))
+  const validResponses = Object.keys(responsesMap).filter(k => validQuestionIds.has(k))
+  const totalAnswered = validResponses.filter(k => responsesMap[k] > 0).length
+  const totalNoInfo = validResponses.filter(k => responsesMap[k] === 0).length
+  const completeness = totalQuestions > 0 ? Math.min(100, Math.round((totalAnswered / totalQuestions) * 100)) : 0
 
-  const categoryScores = (data.scores || []).map(s => ({ ...s, label: categoryLabels[s.category] || s.category }))
+  const categoryScores = (data.scores || []).map(s => ({ ...s, percentage: Math.min(100, s.percentage), label: categoryLabels[s.category] || s.category }))
   const sortedCategories = [...categoryScores].sort((a, b) => a.percentage - b.percentage)
   const strongest = sortedCategories[sortedCategories.length - 1]
   const weakest = sortedCategories[0]
@@ -91,7 +93,7 @@ export default function PDFTemplatePage() {
     return { q, answer: a, score: (a * q.weight) / (4 * q.weight) }
   }).filter(Boolean).sort((a: any, b: any) => a.score - b.score).slice(0, 5)
 
-  const classification = getClassification(data.totalScore || 0)
+  const classification = getClassification(Math.min(100, data.totalScore || 0))
   const classColor = getColor(classification)
 
   // Parse visible sections from resultJson
@@ -183,7 +185,7 @@ export default function PDFTemplatePage() {
       {/* Resultado Geral */}
       {visibleSections.overall !== false && (
       <div className="result-box">
-        <div className="score">{Math.round(data.totalScore || 0)}%</div>
+        <div className="score">{Math.round(Math.min(100, data.totalScore || 0))}%</div>
         <div className="label">Nota Geral</div>
         <div className="badge" style={{ backgroundColor: classColor }}>{classification}</div>
         <p className="desc">

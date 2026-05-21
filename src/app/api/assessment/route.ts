@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
         state: registrationData.state,
         consentGiven: true,
         status: 'completed',
-        totalScore: result.totalPercentage ?? result.totalScore ?? 0,
+        totalScore: Math.min(100, result.totalPercentage ?? result.totalScore ?? 0),
       },
     })
 

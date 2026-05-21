@@ -2432,7 +2432,7 @@ export function calculateResult(answers: Record<string, number>): CheckupResult 
       }
     });
 
-    const percentage = Math.round((score / maxScore) * 100);
+    const percentage = Math.min(100, Math.round((score / maxScore) * 100));
     let level: 'critico' | 'necessita_melhorias' | 'precisa_tecnologia' | 'em_desenvolvimento';
     
     // Sempre indicar necessidade de melhoria - o objetivo é vender o CME Inteligente
@@ -2465,7 +2465,7 @@ export function calculateResult(answers: Record<string, number>): CheckupResult 
   // Calcular score geral
   const totalScore = categoryResults.reduce((sum, c) => sum + c.score, 0);
   const totalMaxScore = categoryResults.reduce((sum, c) => sum + c.maxScore, 0);
-  const overallScore = Math.round((totalScore / totalMaxScore) * 100);
+  const overallScore = Math.min(100, Math.round((totalScore / totalMaxScore) * 100));
 
   let overallLevel: 'critico' | 'necessita_melhorias' | 'precisa_tecnologia' | 'em_desenvolvimento';
   if (overallScore < 30) overallLevel = 'critico';

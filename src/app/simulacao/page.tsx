@@ -54,8 +54,9 @@ function CircularProgress({ percentage, size = 180, strokeWidth = 12, label }: {
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (percentage / 100) * circumference;
-  const color = percentage >= 80 ? '#059669' : percentage >= 60 ? '#0D9488' : percentage >= 40 ? '#D97706' : '#DC2626';
+  const clampedPercentage = Math.min(100, percentage);
+  const offset = circumference - (clampedPercentage / 100) * circumference;
+  const color = clampedPercentage >= 80 ? '#059669' : clampedPercentage >= 60 ? '#0D9488' : clampedPercentage >= 40 ? '#D97706' : '#DC2626';
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -65,7 +66,7 @@ function CircularProgress({ percentage, size = 180, strokeWidth = 12, label }: {
           <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset} style={{ transition: 'stroke-dashoffset 1.5s ease-in-out' }} />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-bold" style={{ color }}>{Math.round(percentage)}%</span>
+          <span className="text-3xl font-bold" style={{ color }}>{Math.min(100, Math.round(percentage))}%</span>
           {label && <span className="text-xs text-muted-foreground mt-1">{label}</span>}
         </div>
       </div>
@@ -145,15 +146,15 @@ export default function SimulacaoPage() {
   const responses = useMemo(() => generateMockResponses(), []);
   const data = MOCK;
 
-  const classification = getClassification(data.totalScore);
+  const classification = getClassification(Math.min(100, data.totalScore));
   const classColor = getClassificationColor(classification);
   const classBg = getClassificationBg(classification);
 
   const categoryScores = [
-    { category: 'gestao' as CategoryKey, label: 'Gestão', percentage: data.managementScore },
-    { category: 'processo' as CategoryKey, label: 'Processo', percentage: data.processScore },
-    { category: 'tecnologia' as CategoryKey, label: 'Tecnologia', percentage: data.technologyScore },
-    { category: 'financeiro' as CategoryKey, label: 'Financeiro e Riscos', percentage: data.financialScore },
+    { category: 'gestao' as CategoryKey, label: 'Gestão', percentage: Math.min(100, data.managementScore) },
+    { category: 'processo' as CategoryKey, label: 'Processo', percentage: Math.min(100, data.processScore) },
+    { category: 'tecnologia' as CategoryKey, label: 'Tecnologia', percentage: Math.min(100, data.technologyScore) },
+    { category: 'financeiro' as CategoryKey, label: 'Financeiro e Riscos', percentage: Math.min(100, data.financialScore) },
   ];
 
   const sortedCategories = [...categoryScores].sort((a, b) => a.percentage - b.percentage);
@@ -177,8 +178,10 @@ export default function SimulacaoPage() {
   });
 
   const totalQuestions = checkupQuestions.length;
-  const totalAnswered = Object.keys(responses).filter(k => responses[k] > 0).length;
-  const totalNoInfo = Object.keys(responses).filter(k => responses[k] === 0).length;
+  const validQuestionIds = new Set(checkupQuestions.map(q => q.id));
+  const validResponseKeys = Object.keys(responses).filter(k => validQuestionIds.has(k));
+  const totalAnswered = validResponseKeys.filter(k => responses[k] > 0).length;
+  const totalNoInfo = validResponseKeys.filter(k => responses[k] === 0).length;
 
   const worstQuestions = checkupQuestions.map(q => {
     const a = responses[q.id]; if (a === undefined || a === 0) return null;
@@ -253,7 +256,7 @@ export default function SimulacaoPage() {
           {/* Overall Score — ALWAYS */}
           <Card className="border-0 shadow-lg">
             <CardContent className="pt-8 pb-8 flex flex-col items-center">
-              <CircularProgress percentage={data.totalScore} size={200} strokeWidth={14} label="Nota Geral" />
+              <CircularProgress percentage={Math.min(100, data.totalScore)} size={200} strokeWidth={14} label="Nota Geral" />
               <div className={`mt-4 px-6 py-2 rounded-full border-2 font-bold text-lg flex items-center gap-2 ${classBg} ${classColor}`}>
                 {getClassificationIcon(classification)} {classification}
               </div>
@@ -315,7 +318,7 @@ export default function SimulacaoPage() {
                   <div className="text-center"><p className="text-2xl font-bold text-gray-900">{totalAnswered}</p><p className="text-xs text-muted-foreground">Respondidas</p></div>
                   <div className="text-center"><p className="text-2xl font-bold text-amber-600">{totalNoInfo}</p><p className="text-xs text-muted-foreground">Sem Informação</p></div>
                   <div className="text-center"><p className="text-2xl font-bold text-gray-900">{totalQuestions}</p><p className="text-xs text-muted-foreground">Total</p></div>
-                  <div className="text-center"><p className="text-2xl font-bold text-teal-600">{Math.round(totalAnswered / totalQuestions * 100)}%</p><p className="text-xs text-muted-foreground">Completude</p></div>
+                  <div className="text-center"><p className="text-2xl font-bold text-teal-600">{Math.min(100, Math.round(totalAnswered / totalQuestions * 100))}%</p><p className="text-xs text-muted-foreground">Completude</p></div>
                 </div>
               </CardContent>
             </Card>

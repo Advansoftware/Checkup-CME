@@ -174,7 +174,8 @@ function CircularProgress({ percentage, size = 140, strokeWidth = 10, color }: {
 }) {
   const radius = (size - strokeWidth) / 2
   const circumference = radius * 2 * Math.PI
-  const offset = circumference - (percentage / 100) * circumference
+  const clampedPercentage = Math.min(100, percentage)
+  const offset = circumference - (clampedPercentage / 100) * circumference
 
   return (
     <div className="relative" style={{ width: size, height: size }}>
@@ -195,7 +196,7 @@ function CircularProgress({ percentage, size = 140, strokeWidth = 10, color }: {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-bold" style={{ color }}>{Math.round(percentage)}%</span>
+        <span className="text-3xl font-bold" style={{ color }}>{Math.min(100, Math.round(percentage))}%</span>
       </div>
     </div>
   )
@@ -250,7 +251,7 @@ export default function AssessmentDetailPage() {
           }
         }
       })
-      const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0
+      const percentage = maxScore > 0 ? Math.min(100, (score / maxScore) * 100) : 0
       return { ...cat, score, maxScore, percentage, answered, noInfo, totalQuestions: catQuestions.length }
     })
   }, [responsesMap])
@@ -459,7 +460,7 @@ export default function AssessmentDetailPage() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row items-center gap-8">
-                  <CircularProgress percentage={assessment.totalScore || 0} color={getClassificationHexColor(classification)} />
+                  <CircularProgress percentage={Math.min(100, assessment.totalScore || 0)} color={getClassificationHexColor(classification)} />
                   <div className="flex-1">
                     <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 font-bold ${classBg} ${classColor}`}>
                       {getClassificationIcon(classification)}
@@ -487,7 +488,7 @@ export default function AssessmentDetailPage() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   {CATEGORIES.map(cat => {
                     const score = assessment.scores?.find(s => s.category === cat.key)
-                    const percentage = score?.percentage || 0
+                    const percentage = Math.min(100, score?.percentage || 0)
                     return (
                       <div key={cat.key} className="bg-gray-50 rounded-xl p-4">
                         <div className="flex items-center gap-2 mb-3">
@@ -498,7 +499,7 @@ export default function AssessmentDetailPage() {
                           <span className="text-sm text-muted-foreground ml-auto">{Math.round(percentage)}%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div className="h-2 rounded-full transition-all" style={{ width: `${percentage}%`, backgroundColor: cat.color }} />
+                          <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(100, percentage)}%`, backgroundColor: cat.color }} />
                         </div>
                       </div>
                     )
@@ -528,9 +529,9 @@ export default function AssessmentDetailPage() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <div className="flex-1 bg-gray-200 rounded-full h-2">
-                          <div className="h-2 rounded-full" style={{ width: `${cat.percentage}%`, backgroundColor: cat.color }} />
+                          <div className="h-2 rounded-full" style={{ width: `${Math.min(100, cat.percentage)}%`, backgroundColor: cat.color }} />
                         </div>
-                        <span className="text-sm font-medium w-12 text-right">{Math.round(cat.percentage)}%</span>
+                        <span className="text-sm font-medium w-12 text-right">{Math.min(100, Math.round(cat.percentage))}%</span>
                       </div>
                       <div className="text-xs text-muted-foreground flex gap-3">
                         <span className="text-emerald-600">{cat.answered} respondidas</span>

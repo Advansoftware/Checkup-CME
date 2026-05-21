@@ -82,14 +82,15 @@ function CircularProgress({
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (percentage / 100) * circumference;
+  const clampedPercentage = Math.min(100, percentage);
+  const offset = circumference - (clampedPercentage / 100) * circumference;
 
   const color =
-    percentage >= 80
+    clampedPercentage >= 80
       ? "#059669"
-      : percentage >= 60
+      : clampedPercentage >= 60
         ? "#0D9488"
-        : percentage >= 40
+        : clampedPercentage >= 40
           ? "#D97706"
           : "#DC2626";
 
@@ -120,7 +121,7 @@ function CircularProgress({
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-3xl font-bold" style={{ color }}>
-            {Math.round(percentage)}%
+            {Math.min(100, Math.round(percentage))}%
           </span>
           {label && (
             <span className="text-xs text-muted-foreground mt-1">{label}</span>
@@ -534,7 +535,7 @@ export default function CheckupPage() {
           maxScore += 4 * q.weight;
         }
       });
-      const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
+      const percentage = maxScore > 0 ? Math.min(100, (score / maxScore) * 100) : 0;
       return { category: cat.key, score, maxScore, percentage };
     });
 
@@ -544,7 +545,7 @@ export default function CheckupPage() {
       0,
     );
     const totalPercentage =
-      totalMaxScore > 0 ? (totalScore / totalMaxScore) * 100 : 0;
+      totalMaxScore > 0 ? Math.min(100, (totalScore / totalMaxScore) * 100) : 0;
 
     const newResult: AssessmentResult = {
       totalPercentage,

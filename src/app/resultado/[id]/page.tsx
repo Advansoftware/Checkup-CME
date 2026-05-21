@@ -46,8 +46,9 @@ function CircularProgress({ percentage, size = 180, strokeWidth = 12, label }: {
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (percentage / 100) * circumference;
-  const color = percentage >= 80 ? '#059669' : percentage >= 60 ? '#0D9488' : percentage >= 40 ? '#D97706' : '#DC2626';
+  const clampedPercentage = Math.min(100, percentage);
+  const offset = circumference - (clampedPercentage / 100) * circumference;
+  const color = clampedPercentage >= 80 ? '#059669' : clampedPercentage >= 60 ? '#0D9488' : clampedPercentage >= 40 ? '#D97706' : '#DC2626';
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -57,7 +58,7 @@ function CircularProgress({ percentage, size = 180, strokeWidth = 12, label }: {
           <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset} style={{ transition: 'stroke-dashoffset 1.5s ease-in-out' }} />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-bold" style={{ color }}>{Math.round(percentage)}%</span>
+          <span className="text-3xl font-bold" style={{ color }}>{Math.min(100, Math.round(percentage))}%</span>
           {label && <span className="text-xs text-muted-foreground mt-1">{label}</span>}
         </div>
       </div>
@@ -170,7 +171,7 @@ const FINANCIAL_LABELS: Record<string, string> = {
 };
 
 function ResultsView({ data, id }: { data: AssessmentData; id: string }) {
-  const classification = getClassification(data.totalScore);
+  const classification = getClassification(Math.min(100, data.totalScore));
   const classColor = getClassificationColor(classification);
   const classBg = getClassificationBg(classification);
 
@@ -235,12 +236,12 @@ function ResultsView({ data, id }: { data: AssessmentData; id: string }) {
   const categoryScores = data.scores?.map((s: any) => ({
     category: s.category as CategoryKey,
     label: s.category === 'gestao' ? 'Gestão' : s.category === 'processo' ? 'Processo' : s.category === 'tecnologia' ? 'Tecnologia' : 'Financeiro e Riscos',
-    percentage: s.percentage ?? 0,
+    percentage: Math.min(100, s.percentage ?? 0),
   })) ?? [
-    { category: 'gestao' as CategoryKey, label: 'Gestão', percentage: data.result?.managementScore ?? 0 },
-    { category: 'processo' as CategoryKey, label: 'Processo', percentage: data.result?.processScore ?? 0 },
-    { category: 'tecnologia' as CategoryKey, label: 'Tecnologia', percentage: data.result?.technologyScore ?? 0 },
-    { category: 'financeiro' as CategoryKey, label: 'Financeiro e Riscos', percentage: data.result?.financialScore ?? 0 },
+    { category: 'gestao' as CategoryKey, label: 'Gestão', percentage: Math.min(100, data.result?.managementScore ?? 0) },
+    { category: 'processo' as CategoryKey, label: 'Processo', percentage: Math.min(100, data.result?.processScore ?? 0) },
+    { category: 'tecnologia' as CategoryKey, label: 'Tecnologia', percentage: Math.min(100, data.result?.technologyScore ?? 0) },
+    { category: 'financeiro' as CategoryKey, label: 'Financeiro e Riscos', percentage: Math.min(100, data.result?.financialScore ?? 0) },
   ];
 
   const sortedCategories = [...categoryScores].sort((a, b) => a.percentage - b.percentage);
@@ -267,8 +268,10 @@ function ResultsView({ data, id }: { data: AssessmentData; id: string }) {
 
   // Stats
   const totalQuestions = checkupQuestions.length;
-  const totalAnswered = Object.keys(responses).filter(k => responses[k] > 0).length;
-  const totalNoInfo = Object.keys(responses).filter(k => responses[k] === 0).length;
+  const validQuestionIds = new Set(checkupQuestions.map(q => q.id));
+  const validResponseKeys = Object.keys(responses).filter(k => validQuestionIds.has(k));
+  const totalAnswered = validResponseKeys.filter(k => responses[k] > 0).length;
+  const totalNoInfo = validResponseKeys.filter(k => responses[k] === 0).length;
 
   // Worst 5 questions
   const worstQuestions = useMemo(() => {
@@ -338,7 +341,7 @@ function ResultsView({ data, id }: { data: AssessmentData; id: string }) {
   })();
 
   const handleDownload = () => {
-    const categoryLines = categoryScores.map(cs => `  • ${cs.label}: ${cs.percentage.toFixed(1)}%`).join('\n');
+    const categoryLines = categoryScores.map(cs => `  • ${cs.label}: ${Math.min(100, cs.percentage).toFixed(1)}%`).join('\n');
     const recommendationLines = weakestCategories.map(cs => `\n📌 ${cs.label} (prioridade):\n${recommendations[cs.category]}`).join('\n');
     const adminNote = (sections.adminObservation && adminObs) ? `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOBSERVAÇÃO DO ESPECIALISTA\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${adminObs}\n` : '';
     const financialNote = (sections.adjustedFinancials && (economyMin || economyMax || riskLevel || lossEdited))
@@ -374,7 +377,7 @@ Localização: ${stateLabel}
 RESULTADO GERAL
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Pontuação Total: ${data.totalScore.toFixed(1)}%
+Pontuação Total: ${Math.min(100, data.totalScore).toFixed(1)}%
 Classificação: ${classification}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -480,7 +483,7 @@ Não substitui auditorias regulatórias oficiais.
         {/* Overall Score — ALWAYS VISIBLE */}
         <Card className="border-0 shadow-lg">
           <CardContent className="pt-8 pb-8 flex flex-col items-center">
-            <CircularProgress percentage={data.totalScore} size={200} strokeWidth={14} label="Nota Geral" />
+            <CircularProgress percentage={Math.min(100, data.totalScore)} size={200} strokeWidth={14} label="Nota Geral" />
             <div className={`mt-4 px-6 py-2 rounded-full border-2 font-bold text-lg flex items-center gap-2 ${classBg} ${classColor}`}>
               {getClassificationIcon(classification)}
               {classification}
@@ -517,7 +520,7 @@ Não substitui auditorias regulatórias oficiais.
                         <span className="font-medium text-sm">{cs.label}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`text-sm font-bold ${getClassificationColor(catClass)}`}>{cs.percentage.toFixed(1)}%</span>
+                        <span className={`text-sm font-bold ${getClassificationColor(catClass)}`}>{Math.min(100, cs.percentage).toFixed(1)}%</span>
                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border ${getClassificationBg(catClass)} ${getClassificationColor(catClass)}`}>
                           {getClassificationIcon(catClass)}
                           {catClass}
@@ -525,7 +528,7 @@ Não substitui auditorias regulatórias oficiais.
                       </div>
                     </div>
                     <div className="h-3 bg-muted rounded-full overflow-hidden">
-                      <div className={`h-full rounded-full transition-all duration-1000 ${barColor}`} style={{ width: `${cs.percentage}%` }} />
+                      <div className={`h-full rounded-full transition-all duration-1000 ${barColor}`} style={{ width: `${Math.min(100, cs.percentage)}%` }} />
                     </div>
                   </div>
                 );
@@ -577,7 +580,7 @@ Não substitui auditorias regulatórias oficiais.
                   <p className="text-xs text-muted-foreground">Total</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-teal-600">{Math.round(totalAnswered / totalQuestions * 100)}%</p>
+                  <p className="text-2xl font-bold text-teal-600">{Math.min(100, Math.round(totalAnswered / totalQuestions * 100))}%</p>
                   <p className="text-xs text-muted-foreground">Completude</p>
                 </div>
               </div>
@@ -759,7 +762,7 @@ Não substitui auditorias regulatórias oficiais.
                     <div>
                       <div className="flex items-center justify-between mb-1">
                         <p className="font-semibold text-sm">{catInfo.label}</p>
-                        <Badge variant="secondary" className="text-xs">{cs.percentage.toFixed(1)}%</Badge>
+                        <Badge variant="secondary" className="text-xs">{Math.min(100, cs.percentage).toFixed(1)}%</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">{recommendations[cs.category]}</p>
                     </div>
