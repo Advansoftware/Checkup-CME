@@ -13,11 +13,10 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Buscar avaliação em andamento ou pendente mais recente
+    // Buscar avaliação mais recente do usuário independente de status
     const assessment = await db.assessment.findFirst({
       where: {
         userId: userPayload.userId,
-        status: { in: ['pending', 'in_progress'] },
       },
       include: {
         responses: true,

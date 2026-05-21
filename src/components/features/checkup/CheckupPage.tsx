@@ -402,7 +402,7 @@ export default function CheckupPage() {
             responsesMap.set(qId, ans as number);
           });
           setResponses(responsesMap);
-          if (data.assessment.status === "completed") {
+          if (data.assessment.status === "completed" || data.assessment.status === "sent" || data.assessment.status === "released") {
             setScreen("thankyou");
           } else {
             setHasExistingAssessment(true);
@@ -1474,13 +1474,9 @@ function ThankYouScreen({ onRestart }: { onRestart: () => void }) {
 
             <Separator />
             <div className="flex gap-3 justify-center">
-              <Button variant="outline" onClick={logout}>
+              <Button variant="outline" onClick={logout} className="w-full sm:w-auto">
                 <LogOut className="w-4 h-4 mr-2" />
                 Sair
-              </Button>
-              <Button onClick={onRestart} className="bg-teal-600">
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Nova Avaliação
               </Button>
             </div>
           </CardContent>
