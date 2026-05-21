@@ -11,6 +11,17 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Loader2, ArrowLeft, ArrowRight, CheckCircle, Copy, ExternalLink, BarChart3, TrendingUp, Cpu, DollarSign, AlertTriangle, Star, Target, Shield, Activity, Building2, Users, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
 import { checkupQuestions } from '@/lib/checkup-questions'
 
@@ -223,6 +234,7 @@ export default function AssessmentDetailPage() {
     overall: true, categories: true, recommendations: true, economy: true, financialRisk: true
   })
   const [showAllAnswers, setShowAllAnswers] = useState(false)
+  const [isReleaseDialogOpen, setIsReleaseDialogOpen] = useState(false)
 
   // Converter respostas para map
   const responsesMap = useMemo(() => {
@@ -364,6 +376,7 @@ export default function AssessmentDetailPage() {
       if (!res.ok) throw new Error('Erro ao liberar')
       setReleaseSuccess(true)
       setAssessment(prev => prev ? { ...prev, status: 'released' } : null)
+      setIsReleaseDialogOpen(false)
     } catch (err) {
       setReleaseError('Erro ao liberar resultado')
     } finally {
@@ -784,10 +797,42 @@ export default function AssessmentDetailPage() {
 
                 {assessment.status !== 'released' ? (
                   <div className="space-y-2">
-                    <Button className="w-full" onClick={handleRelease} disabled={releaseLoading}>
-                      {releaseLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
-                      Liberar Resultado
-                    </Button>
+                    <AlertDialog open={isReleaseDialogOpen} onOpenChange={setIsReleaseDialogOpen}>
+                      <AlertDialogTrigger asChild>
+                        <Button className="w-full" disabled={releaseLoading}>
+                          {releaseLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+                          Liberar Resultado
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Tem certeza que deseja liberar este resultado?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Ao liberar o resultado, o usuário correspondente poderá acessar o diagnóstico completo dele. Esta ação enviará a liberação técnica e não poderá ser desfeita.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel disabled={releaseLoading}>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+                              e.preventDefault()
+                              await handleRelease()
+                            }}
+                            disabled={releaseLoading}
+                            className="bg-teal-600 hover:bg-teal-700 text-white border-0"
+                          >
+                            {releaseLoading ? (
+                              <>
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                Liberando...
+                              </>
+                            ) : (
+                              'Sim, Liberar'
+                            )}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                     {releaseError && <p className="text-sm text-red-600">{releaseError}</p>}
                     {releaseSuccess && <p className="text-sm text-emerald-600">Resultado liberado com sucesso!</p>}
                   </div>
