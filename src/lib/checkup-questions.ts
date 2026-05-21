@@ -1669,17 +1669,17 @@ export const checkupQuestions: Question[] = [
       },
       {
         value: 2,
-        label: 'Possuímos vapor e peróxido de hidrogênio',
+        label: 'Possuímos vapor e óxido de etileno (ETO)',
         impact: 'Boa cobertura, atende materiais termossensíveis com tecnologia complementar'
       },
       {
         value: 3,
-        label: 'Possuímos vapor e plasma',
+        label: 'Possuímos vapor ,peróxido de hidrogênio ( plasma) e  ou formaldeído',
         impact: 'Tecnologia diversificada, cobertura quase total de todos os tipos de materiais'
       },
       {
         value: 4,
-        label: 'Possuimos vapor e formol aldeído',
+        label: 'Possuímos todo os tipos de tecnologia citadas anteriormente',
         impact: 'Parque tecnológico completo, autossuficiência, máxima versatilidade'
       },
       {
